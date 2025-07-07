@@ -1,0 +1,140 @@
+/* src/components/SubHeader.module.css */
+
+.subHeader {
+  width: 100%;
+  background-color: #edede9;
+  border-bottom: 1px solid #dcdcdc;
+  position: relative; /* <-- Important for z-index */
+  z-index: 999;       /* <-- FIX: On top, but below main header */
+  display: block;     /* <-- Default desktop state */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  gap: 8px;
+}
+
+.navButton,
+.loginButton {
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.navButton {
+  background-color: transparent;
+  color: #333;
+}
+
+.navButton:hover {
+  background-color: #dcdcdc;
+}
+
+.loginButton {
+  background-color: #d9534f;
+  color: #fff;
+}
+
+.loginButton:hover {
+  background-color: #c9302c;
+}
+
+.spacer {
+  flex-grow: 1; /* Pushes content to the sides */
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  padding: 8px;
+}
+
+/* --- Mega Menu Styles (Reused for consistency) --- */
+.navItem {
+  position: relative;
+}
+
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 900px;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  padding: 30px 40px;
+  border-top: 3px solid #d9534f;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.megaMenu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.megaMenuContent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.megaMenuColumn h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+}
+
+.megaMenuColumn ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.megaMenuColumn li {
+  margin-bottom: 12px;
+}
+
+.megaMenuColumn a {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.megaMenuColumn a:hover {
+  color: #d9534f;
+}
+
+/* --- RESPONSIVE HIDING --- */
+/* On screens 1024px or less, hide the entire SubHeader component */
+@media (max-width: 1024px) {
+  .subHeader {
+    display: none;
+  }
+}

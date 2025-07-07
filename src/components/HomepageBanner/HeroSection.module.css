@@ -1,0 +1,210 @@
+/* src/components/HeroSection.module.css */
+
+.heroWrapper {
+  width: 100%;
+  position: relative;
+}
+
+/* --- 1. Carousel Styles --- */
+.carouselContainer {
+  height: 550px; /* Adjust height as needed */
+  position: relative;
+  width: 100%;
+}
+
+.swiperInstance {
+  height: 100%;
+}
+
+.slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* This is the red glow/vignette effect at the top */
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 150px;
+  background: radial-gradient(circle at 50% 0, rgba(217, 83, 79, 0.2), transparent 70%);
+  z-index: 2;
+}
+
+.slideOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  padding: 0 8%;
+}
+
+.descriptionBox {
+  background-color: rgba(188, 71, 73, 0.8); /* Semi-transparent red background */
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  backdrop-filter: blur(4px); /* Creates a glassy effect */
+}
+
+.descriptionBox p {
+  font-size: 22px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Custom Pagination styling to make dots look like lines */
+.customPagination {
+  position: absolute;
+  bottom: 80px; /* Position it above the products bar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+}
+/* We need to target the Swiper class globally to style it */
+:global(.swiper-pagination-bullet) {
+  width: 40px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+  transition: background-color 0.3s;
+}
+:global(.swiper-pagination-bullet-active) {
+  background-color: #ffffff;
+}
+
+/* --- 2. Products Bar Styles --- */
+
+.productsBar {
+  background-color: #4a4a4a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 0px 0px;
+  flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+  gap: 0px;
+}
+
+.productItem {
+  padding: 10px 10px;
+  text-align: center;
+   gap: 0px;
+}
+
+.productItem h4 {
+  margin: 0 0 0px 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.productItem a {
+  color: #c0c0c0;
+  font-size: 14px;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.productItem a:hover {
+  color: #ffffff;
+}
+/* --- NEW: Hover Effect Styles --- */
+.productItem:hover {
+  background-color: #d9534f; /* The red color from your design */
+}
+
+/* When the container is hovered, change the text color of the children to white */
+.productItem:hover h4,
+.productItem:hover a {
+  color: #ffffff;
+}
+/* --- 3. Client Actions Bar Styles --- */
+.clientActionsBar {
+  background-color: #e0e0e0;
+  color: #333333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.clientActionsBar p {
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 15px;
+}
+
+.actionButton {
+  background-color: transparent;
+  border: 1px solid #888888;
+  color: #333333;
+  padding: 8px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.actionButton:hover {
+  background-color: #4a4a4a;
+  border-color: #4a4a4a;
+  color: #ffffff;
+}
+
+/* This is the container for our indicator lines */
+.customPagination {
+  position: absolute;
+  bottom: 80px; /* Adjust vertical position to be above the dark grey bar */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  gap: 8px; /* Space between the lines */
+}
+
+/* 
+  IMPORTANT: Swiper generates its own class names. To style them from a CSS Module,
+  we must wrap them in `:global()`. This tells Next.js not to hash these specific class names.
+*/
+
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .carouselContainer {
+    height: 450px;
+  }
+  .descriptionBox {
+    padding: 20px;
+    max-width: 90%;
+  }
+  .descriptionBox p {
+    font-size: 18px;
+  }
+  .customPagination {
+    bottom: 90px;
+  }
+  .productsBar {
+    justify-content: center;
+  }
+  .clientActionsBar {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}

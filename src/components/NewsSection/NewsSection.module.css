@@ -1,0 +1,35 @@
+.newsSection {
+  font-family: sans-serif;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.newsSectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.newsSectionTitle {
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+}
+
+.newsSectionViewAll {
+  color: #d9534f;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.newsSectionViewAll:hover {
+  text-decoration: underline;
+}
+
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}

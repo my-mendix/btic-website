@@ -1,0 +1,35 @@
+/* src/components/WhyBoubyanSection.module.css */
+
+.sectionContainer {
+  max-width: 1200px;
+  margin: 60px auto; /* Adds space above/below and centers the component */
+  padding: 0 20px;   /* Provides padding on smaller screens */
+  font-family: sans-serif;
+}
+
+.sectionTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 30px; /* Space between title and image */
+}
+
+.imageWrapper {
+  margin-bottom: 30px; /* Space between image and description */
+  line-height: 0; /* Removes any extra space below the image */
+}
+
+/* This makes the image responsive while maintaining its aspect ratio */
+.sectionImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Optional: adds slightly rounded corners */
+  object-fit: cover;
+}
+
+.sectionDescription {
+  font-size: 16px;
+  line-height: 1.7; /* Improves readability */
+  color: #555555;
+  text-align: left;
+}

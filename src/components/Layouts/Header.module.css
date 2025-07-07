@@ -1,0 +1,180 @@
+/* src/components/Header.module.css */
+
+/* --- Main Header Container --- */
+.header {
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative; /* <-- ESSENTIAL for z-index to work */
+  z-index: 1000;      /* <-- FIX for mega menu hiding */
+  display: block;     /* <-- Default desktop state */
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Top Bar Styles --- */
+.topBar {
+  background-color: #4a4a4a;
+  padding: 8px 0;
+  color: #fff;
+}
+
+.topNav,
+.topRight {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.topNavLink,
+.topNavLinkActive {
+  color: #c0c0c0;
+  text-decoration: none;
+  font-size: 14px;
+  padding: 5px 0;
+  transition: color 0.2s;
+}
+
+.topNavLink:hover {
+  color: #fff;
+}
+
+.topNavLinkActive {
+  color: #fff;
+  font-weight: 600;
+  border-bottom: 2px solid #fff;
+}
+
+/* --- Main Nav Styles --- */
+.mainNav {
+  padding: 15px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+.mainNavLinks {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+.mainNavLink,
+.mainNavLinkActive {
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 0;
+}
+
+.mainNavLinkActive {
+  color: #d9534f; /* Red color */
+  border-bottom: 2px solid #d9534f;
+}
+
+.mainRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.searchButton {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+}
+
+.loginButton {
+  background-color: #d9534f;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.loginButton:hover {
+  background-color: #c9302c;
+}
+
+/* --- Mega Menu Styles --- */
+.navItem {
+  position: relative;
+}
+
+.megaMenu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  width: 900px;
+  background-color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 8px 8px;
+  padding: 30px 40px;
+  border-top: 3px solid #d9534f;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+
+.megaMenu.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.megaMenuContent {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+.megaMenuColumn h4 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+}
+
+.megaMenuColumn ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.megaMenuColumn li {
+  margin-bottom: 12px;
+}
+
+.megaMenuColumn a {
+  color: #555;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.megaMenuColumn a:hover {
+  color: #d9534f;
+}
+
+/* --- RESPONSIVE HIDING --- */
+/* On screens 1024px or less, hide the entire Header component */
+@media (max-width: 1024px) {
+  .header {
+    display: none;
+  }
+}
