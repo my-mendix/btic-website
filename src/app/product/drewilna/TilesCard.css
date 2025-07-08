@@ -1,0 +1,96 @@
+
+.news-section {
+  font-family: sans-serif;
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.news-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.news-section-title {
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+}
+
+.news-section-view-all {
+  color: #d9534f; /* A reddish color similar to the screenshot */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.news-section-view-all:hover {
+  text-decoration: underline;
+}
+
+/* Responsive grid for the cards */
+.news-grid {
+  display: grid;
+  /* Creates 3 columns on large screens, 2 on medium, 1 on small */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px; /* Space between cards */
+}
+
+/* Individual card styling */
+.news-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden; /* Ensures the image corners are rounded */
+  display: flex;
+  flex-direction: column; /* Stacks content vertically */
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.news-card-image {
+  width: 100%;
+  height: 200px; /* Fixed height for all images */
+  object-fit: cover; /* Ensures images cover the area without distortion */
+  display: block;
+}
+
+.news-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allows content to fill the available space */
+}
+
+.news-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 0 0 15px 0;
+  line-height: 1.4;
+}
+
+.news-card-description {
+  font-size: 14px;
+  color: #555;
+  line-height: 1.6;
+  margin: 0 0 15px 0;
+  flex-grow: 1; /* Pushes the 'Read More' link to the bottom */
+}
+
+.news-card-link {
+  color: #d9534f;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: auto; /* Pushes the link to the bottom of the card content */
+  align-self: flex-start;
+}
+
+.news-card-link:hover {
+  text-decoration: underline;
+}

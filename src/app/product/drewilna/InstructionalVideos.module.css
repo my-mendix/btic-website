@@ -1,0 +1,61 @@
+.videoSection {
+  padding: 40px 0;
+  background-color: #f9f9f9;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.videoCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.thumbnailLink {
+  position: relative;
+  display: block;
+}
+
+.thumbnailLink img {
+  width: 100%;
+  height: auto;
+}
+
+.playIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: transform 0.2s;
+}
+
+.thumbnailLink:hover .playIcon {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.videoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  padding: 15px 20px 5px;
+}
+
+.playLink {
+  display: inline-block;
+  padding: 0 20px 15px;
+  color: #c0392b;
+  font-weight: 500;
+  text-decoration: none;
+}

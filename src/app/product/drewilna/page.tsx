@@ -1,6 +1,6 @@
 import React from 'react';
 import DrewilnaHero from './DrewilnaHero'
-// import InstructionalVideos from '@/components/drewilna/InstructionalVideos';
+import InstructionalVideos from './InstructionalVideos';
 // import EligibilitySection from '@/components/drewilna/EligibilitySection';
 // import FeaturesAndDownloads from '@/components/drewilna/FeaturesAndDownloads';
 // import FaqSection from '@/components/drewilna/FaqSection';
@@ -14,7 +14,7 @@ export default function DrewilnaPage() {
         <DrewilnaHero />
       </div>
       
-      {/* <InstructionalVideos /> */}
+      <InstructionalVideos />
 
       <div className={styles.pageContainer}>
         {/* <EligibilitySection /> */}
