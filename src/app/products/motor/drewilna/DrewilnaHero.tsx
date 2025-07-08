@@ -11,7 +11,7 @@ const heroData = {
     "Distinguished by its unique feature Drewilna gives the user the capability to monitor and assess the driving behavior of the home driver via the Takaful app.",
     // ... Add all other paragraphs from your JSON here
   ],
-  imageSrc: "/images/car-interior.png", // Make sure this image is in your /public folder
+  imageSrc: "/images/drewilna-product-page.jpg", // Make sure this image is in your /public folder
   imageAlt: "A family enjoying a safe drive"
 };
 
