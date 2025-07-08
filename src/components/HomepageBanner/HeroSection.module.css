@@ -68,8 +68,9 @@
   display: flex;
   gap: 8px;
 }
-/* We need to target the Swiper class globally to style it */
-:global(.swiper-pagination-bullet) {
+
+/* Fix: Nest global Swiper styles inside the local class */
+.customPagination :global(.swiper-pagination-bullet) {
   width: 40px;
   height: 4px;
   border-radius: 2px;
@@ -77,7 +78,7 @@
   opacity: 1;
   transition: background-color 0.3s;
 }
-:global(.swiper-pagination-bullet-active) {
+.customPagination :global(.swiper-pagination-bullet-active) {
   background-color: #ffffff;
 }
 

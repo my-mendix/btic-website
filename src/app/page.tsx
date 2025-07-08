@@ -15,9 +15,9 @@ export default function Home() {
       <SubHeader />
       <HeroSection />
       <ProductSlider />
+      <AboutBtic />
       {/* <WhyBoubyanSection /> */}
       <NewsSection />
-      <AboutBtic />
       <Footer />
     </main>
   );
