@@ -1,0 +1,120 @@
+/* src/components/drewilna/InstructionalVideos.module.css */
+
+/* --- STYLES FOR THE PARENT CONTAINER --- */
+.videoSection {
+  padding: 40px 0;
+  /* background-color: #f9f9f9; */
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 30px;
+}
+
+/* 
+ ==========================================================
+      BELOW ARE THE STYLES FOR THE VideoCard.tsx COMPONENT
+ ==========================================================
+*/
+
+/* --- Video Card Main Container --- */
+.videoCard {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --- Thumbnail and Overlay Styles --- */
+.thumbnailContainer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9; /* Ensures a consistent video shape */
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.thumbnailImage {
+  transition: transform 0.4s ease;
+}
+
+.thumbnailContainer:hover .thumbnailImage {
+  transform: scale(1.1);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent 40%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 15px;
+}
+
+.youtubeBadge {
+  align-self: flex-start;
+  background-color: #c0392b;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.youtubeBadge span {
+  font-weight: bold;
+}
+
+.playIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 50px;
+  color: rgba(255, 255, 255, 0.9);
+  pointer-events: none; /* Allows clicks to go through to the container */
+  transition: color 0.2s;
+}
+
+.thumbnailContainer:hover .playIcon {
+  color: #fff;
+}
+
+/* --- Info Section Below Image --- */
+.infoContainer {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.videoTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 15px 0;
+  flex-grow: 1;
+}
+
+.playLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: #c0392b;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  align-self: flex-start;
+}
