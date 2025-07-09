@@ -1,11 +1,12 @@
 import React from 'react';
-import DrewilnaHero from './DrewilnaHero'
-// import InstructionalVideos from './InstructionalVideos';
+
+
+import styles from './AboutSection/DrewilnaPage.module.css';
+import DrewilnaHero from './AboutSection/DrewilnaHero';
 import EligibilitySection from './EligibilitySection/EligibilitySection';
 import FeaturesAndDownloads from './FeaturesSection/FeaturesAndDownload';
 import InstructionalVideos from './InstructionalVideos/InstructionalVideos';
 import FaqSection from './FAQ/FaqSection';
-import styles from './DrewilnaPage.module.css';
 
 export default function DrewilnaPage() {
   return (
