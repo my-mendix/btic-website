@@ -1,0 +1,67 @@
+.heroSection {
+  padding: 2rem 0;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+}
+
+.heroGrid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.heroImageContainer {
+  flex: 0 0 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroImage {
+  border-radius: 10px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.10);
+}
+
+.heroTextContainer {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.heroTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: #444;
+  margin-bottom: 2rem;
+}
+
+.heroButtonGroup {
+  display: flex;
+  gap: 1rem;
+}
+
+.heroCtaButton {
+  padding: 0.75rem 2rem;
+  border: 1px solid #d92331;
+  background: #fff;
+  color: #d92331;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.heroCtaButton:hover {
+  background: #d92331;
+  color: #fff;
+}

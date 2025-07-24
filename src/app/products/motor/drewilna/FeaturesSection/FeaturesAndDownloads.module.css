@@ -1,0 +1,43 @@
+.section {
+  padding: 40px 0;
+  /* background-color: #302f2f; */
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.downloads {
+  margin-bottom: 40px;
+}
+
+.downloadLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 30px;
+}
+
+.featureCard {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 30px;
+  text-align: center;
+  background: #fff;
+}
+
+.featureIcon {
+  font-size: 40px;
+  color: #c0392b;
+  margin-bottom: 15px;
+}

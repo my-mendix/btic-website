@@ -1,0 +1,24 @@
+.container {
+  padding: 1rem;
+  background-color: #fff;
+}
+
+.heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.downloadLink {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #d32f2f; /* Red color */
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.icon {
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}

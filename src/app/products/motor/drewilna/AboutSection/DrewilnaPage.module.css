@@ -1,0 +1,11 @@
+.pageContainer {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Give the sections with a colored background full width */
+.pageContainer > section {
+  padding-left: 0;
+  padding-right: 0;
+}

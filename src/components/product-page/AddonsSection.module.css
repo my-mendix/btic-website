@@ -1,0 +1,90 @@
+/* src/components/product-page/AddonsSection.module.css */
+
+.addonsSection {
+  padding: 2rem 0;
+  margin: 2rem 0;
+}
+
+.addonsTitle {
+  font-size: 1.75rem; /* 28px */
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.addonsGrid {
+  display: grid;
+  /* Desktop: 4 columns */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem; /* 24px */
+}
+
+.addonCard {
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px; /* Ensures cards have a consistent height */
+  transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.addonCard:hover {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+}
+
+.iconWrapper {
+  margin-bottom: 1rem;
+}
+
+.addonIcon {
+  /* You can add specific styles for the icon if needed */
+  color: #d92331; /* Example if using an icon font that can be colored */
+}
+
+.addonText {
+  font-size: 1rem; /* 16px */
+  color: #444;
+  line-height: 1.5;
+  max-width: 250px; /* Prevents text from becoming too wide */
+}
+
+/* --- Responsive Styles --- */
+
+/* Tablet view (e.g., screens less than 1024px) */
+@media (max-width: 1024px) {
+  .addonsGrid {
+    /* Still 4 columns on larger tablets, or you could change to 3 */
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Mobile view (e.g., screens less than 768px) */
+@media (max-width: 768px) {
+  .addonsGrid {
+    /* Switch to 2 columns for mobile as in your screenshot */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* 16px */
+  }
+
+  .addonCard {
+    padding: 1.5rem 1rem;
+    min-height: 160px;
+  }
+
+  .addonsTitle {
+    font-size: 1.5rem; /* 24px */
+  }
+}
+
+/* Small mobile view (e.g., screens less than 480px) */
+@media (max-width: 480px) {
+  .addonsGrid {
+    /* You could switch to 1 column if needed, but 2 is often better */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
