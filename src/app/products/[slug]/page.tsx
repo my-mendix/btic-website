@@ -5,13 +5,16 @@ import RichTextBlock from '@/components/product-page/RichTextBlock';
 import styles from '@/app/ProductPage.module.css';
 import FaqSection from '@/components/product-page/FaqSection';
 
-interface ProductPageProps {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { slug } = params;
+// It's crucial to correctly type the `params` prop as a Promise
+// and ensure the component is an 'async' function, as it is a server component.
+export default async function ProductPage({ 
+  params 
+}: { 
+  params: Promise<{ slug: string }>; // Type 'params' as a Promise
+}) {
+  // Await 'params' to resolve the Promise and get the actual object
+  const { slug } = await params; 
+  
   const product = await fetchProductBySlug(slug);
 
   const faqs = (product.faqs as unknown as { id: number; faq_question: string; faq_answers: string }[]).map((faq) => ({
@@ -40,7 +43,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
             component={component}
           />
         ))}
-
 
       {/* FAQ Section */}
       <FaqSection faqs={faqs} />
