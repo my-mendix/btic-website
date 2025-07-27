@@ -23,7 +23,7 @@ const FaqSection: React.FC<Props> = ({ faqs, imageSrc }) => {
       <div className={styles.faqGrid}>
         <div className={styles.faqList}>
           <h2 className={styles.sectionTitle}>Frequently Asked Questions</h2>
-          {faqs.map((faq, idx) => (
+          {Array.isArray(faqs) && faqs.map((faq, idx) => (
             <div key={faq.id} className={styles.faqItem}>
               <button
                 className={styles.faqQuestionRow}

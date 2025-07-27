@@ -1,5 +1,6 @@
 // src/lib/media.ts
 import { StrapiMedia } from '@/types/strapi';
+import { getStrapiURL } from './config';
 
 /**
  * Resolves the full URL for a Strapi media object.
@@ -17,5 +18,5 @@ export const getStrapiMedia = (media: StrapiMedia | null | undefined): string | 
   // Otherwise, prepend the Strapi API URL.
   return media.url.startsWith('http')
     ? media.url
-    : `${process.env.NEXT_PUBLIC_STRAPI_API_URL || 'http://localhost:1337'}${media.url}`;
+    : `${getStrapiURL()}${media.url}`;
 };

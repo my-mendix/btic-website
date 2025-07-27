@@ -3,15 +3,13 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './AddonsSection.module.css';
 import { AddonsSectionComponent } from '@/types/strapi';
-import { getStrapiMedia } from '@/types/strapi'; 
+import { getStrapiMedia } from '@/lib/media'; 
 
 interface AddonsSectionProps {
   data: AddonsSectionComponent;
 }
 
 const AddonsSection: React.FC<AddonsSectionProps> = ({ data }) => {
-
-    console.log("AddonsSection data:", data);
   // If there are no features, don't render the component
   if (!data.features || data.features.length === 0) {
     return null;
@@ -22,7 +20,7 @@ const AddonsSection: React.FC<AddonsSectionProps> = ({ data }) => {
       <h2 className={styles.addonsTitle}>{data.title}</h2>
       <div className={styles.addonsGrid}>
         {data.features.map((feature) => {
-          const iconUrl = getStrapiMedia(feature.icon);
+          const iconUrl = getStrapiMedia(feature.icon.data);
           return (
             <div key={feature.id} className={styles.addonCard}>
               {iconUrl && (

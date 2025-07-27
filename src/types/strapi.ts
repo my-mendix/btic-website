@@ -141,6 +141,7 @@ export interface Product {
   title: string;
   slug: string;
   category: string;
+  price?: number;
   locale: string;
   shortDescription: RichTextNode[];
   content: ProductComponent[];
@@ -151,9 +152,27 @@ export interface Product {
   publishedAt: string;
 }
 
+export interface StaticProduct {
+    id: number;
+    documentId: string;
+    Title: string;
+    shortDescription: string;
+    Price: string;
+    Category: string;
+    image: {
+      id: number;
+      documentId: string;
+      url: string;
+      name: string;
+    };
+    Buttons: Button[];
+}
+
+
 // The top-level structure of a Strapi API response for a single product.
 export interface StrapiProductResponse {
   data: Product | null;
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   meta: {};
 }
 

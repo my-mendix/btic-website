@@ -2,10 +2,7 @@
 import { StrapiResponse, Product } from '@/types/strapi';
 import { notFound } from 'next/navigation';
 import qs from 'qs';
-
-// Use a more secure and flexible approach for the Strapi URL.
-// Fallback to a local development URL instead of a hardcoded IP.
-const STRAPI_URL = process.env.STRAPI_API_URL || "http://localhost:1337";
+import { getStrapiURL } from './config';
 
 /**
  * Fetches a single product by its slug from the Strapi API.
@@ -40,6 +37,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
             },
           },
         },
+        ProductHeroSection: { populate: ["image"] },
         seo: { populate: "*" },
         faqs: { populate: "*" },
       },
@@ -49,32 +47,89 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
     }
   );
 
-  const fullUrl = `${STRAPI_URL}/api/products?${query}`;
+  const fullUrl = `${getStrapiURL()}api/products?${query}`;
+  console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
   
   try {
-    // Using 'no-store' is fine for development, but for production,
-    // consider using Next.js's Incremental Static Regeneration (ISR)
-    // by setting `next: { revalidate: 60 }}` for better performance.
-    const res = await fetch(fullUrl, { cache: 'no-store' });
+    const res = await fetch(fullUrl, { next: { revalidate: 60 } });
+
+    console.log("Response:", res);
+    
 
     if (!res.ok) {
-      const errorText = await res.text();
-      console.error(`Failed to fetch product with slug "${slug}". URL: ${fullUrl}. Response: ${errorText}`);
-      throw new Error('Failed to fetch product');
+      // More specific error handling
+      if (res.status === 404) {
+        console.warn(`Product with slug "${slug}" not found.`);
+        notFound();
+      } else {
+        const errorText = await res.text();
+        console.error(`Failed to fetch product with slug "${slug}". URL: ${fullUrl}. Status: ${res.status}. Response: ${errorText}`);
+        throw new Error('Failed to fetch product data.');
+      }
     }
 
     const json: StrapiResponse = await res.json();
 
     if (!json.data || json.data.length === 0) {
-      console.warn(`No product found for slug "${slug}"`);
+      console.warn(`No product data found for slug "${slug}"`);
       notFound();
     }
 
     return json.data[0];
   } catch (error) {
     console.error("Strapi fetch error:", error);
-    // Re-throwing the error or handling it in a more specific way
-    // might be better than just calling notFound() for all errors.
-    notFound();
+    // Let Next.js handle the error page
+    throw new Error('An unexpected error occurred while fetching the product.');
+  }
+}
+
+/**
+ * Fetches all products from the Strapi API.
+ * 
+ * @returns A promise that resolves to an array of products.
+ */
+export async function fetchAllProducts(): Promise<Product[]> {
+  const query = qs.stringify(
+    {
+      fields: ['title', 'slug', 'category', 'price', 'shortDescription'],
+      populate: {
+        content: {
+          on: {
+            "product.hero-section": { populate: ["image"] },
+          },
+        },
+        category: {
+          fields: ['name']
+        }
+      },
+    },
+    {
+      encodeValuesOnly: true,
+    }
+  );
+
+  const fullUrl = `${getStrapiURL()}api/products?${query}`;
+  console.log(`Fetching all products from URL: ${fullUrl}`);
+  
+  try {
+    const res = await fetch(fullUrl, { next: { revalidate: 60 } });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error(`Failed to fetch all products. URL: ${fullUrl}. Status: ${res.status}. Response: ${errorText}`);
+      throw new Error('Failed to fetch products data.');
+    }
+
+    const json: StrapiResponse = await res.json();
+
+    if (!json.data) {
+      console.warn(`No products data found.`);
+      return [];
+    }
+
+    return json.data;
+  } catch (error) {
+    console.error("Strapi fetch error:", error);
+    throw new Error('An unexpected error occurred while fetching products.');
   }
 }

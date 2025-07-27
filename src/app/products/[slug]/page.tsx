@@ -7,11 +7,21 @@ import FaqSection from '@/components/product-page/FaqSection';
 
 interface ProductPageProps {
   params: { slug: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 }
 
-
 export default async function ProductPage({ params }: ProductPageProps) {
-  const product = await fetchProductBySlug(params.slug);
+  const { slug } = params;
+  const product = await fetchProductBySlug(slug);
+
+  const faqs = (product.faqs as unknown as { id: number; faq_question: string; faq_answers: string }[]).map((faq) => ({
+    id: faq.id,
+    question: faq.faq_question,
+    answer: faq.faq_answers.split('\n').map(line => ({
+      type: 'paragraph' as const,
+      children: [{ type: 'text' as const, text: line }],
+    })),
+  }));
 
   return (
     <main className={styles.pageContainer}>
@@ -33,7 +43,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
 
       {/* FAQ Section */}
-      <FaqSection faqs={product.faqs.data} />
+      <FaqSection faqs={faqs} />
       
     </main>
   );
