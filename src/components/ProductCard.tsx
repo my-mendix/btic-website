@@ -12,6 +12,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const imageUrl = product.image ? `${getStrapiURL()}${product.image.url}` : '/images/default-product.png';
   console.log(`Product image URL: ${imageUrl}`);
+  console.log(`Product JSON: ${JSON.stringify(product, null, 2)}`);
 
   return (
     <div className={styles.card}>
@@ -21,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt={product.Title}
           className={styles.image}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className={styles.content}>
