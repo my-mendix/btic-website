@@ -11,7 +11,7 @@
 export const getStrapiURL = (): string => {
 //   const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL;
 
-  const defaultStrapiUrl = "http://10.1.1.148:1337/";
+  const defaultStrapiUrl = "http://10.1.1.148:1337";
 
   const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL || defaultStrapiUrl;
 

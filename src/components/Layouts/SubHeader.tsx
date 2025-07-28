@@ -8,10 +8,16 @@ import Image from 'next/image';
 import styles from './SubHeader.module.css';
 import { FaSearch } from 'react-icons/fa';
 import MegaMenu from './MegaMenu';
-import { megaMenuData } from '@/data/menuData';
+import { MegaMenuColumn } from '@/data/menuData';
 
-const SubHeader: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+
+interface SubHeaderProps {
+  megaMenuData: MegaMenuColumn[];
+}
+
+const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData }) => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);  
 
   return (
     // This component will be hidden on mobile via the CSS

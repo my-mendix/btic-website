@@ -188,3 +188,46 @@ export interface StrapiResponse {
     };
   };
 }
+
+
+// src/types/strapi.ts
+
+// ... (keep any other types you need for other pages) ...
+
+// A single button from the Buttons array
+export interface ProductButton {
+  id: number;
+  label: string;
+  url: string;
+}
+
+// The image object
+export interface ProductImage {
+  id: number;
+  url: string;
+  name: string;
+}
+
+// The main object for a single product tile
+export interface ProductTile {
+  id: number;
+  Title: string;
+  shortDescription: string; // This is a simple string now
+  Price: string;
+  Category: string;
+  image: ProductImage;
+  Buttons: ProductButton[];
+}
+
+// The top-level response from the /api/product-tiles endpoint
+export interface StrapiProductTileResponse {
+  data: ProductTile[];
+  meta: {
+    pagination: {
+      page: number;
+      pageSize: number;
+      pageCount: number;
+      total: number;
+    };
+  };
+}

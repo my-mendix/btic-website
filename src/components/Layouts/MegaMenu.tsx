@@ -11,17 +11,33 @@ interface MegaMenuProps {
   data: MegaMenuColumn[];
 }
 
+
+// Extend types to include id for type safety
+type MegaMenuLinkWithId = {
+  id?: string | number;
+  name: string;
+  href: string;
+};
+type MegaMenuColumnWithId = {
+  id?: string | number;
+  title: string;
+  category: string;
+  links: MegaMenuLinkWithId[];
+};
+
 const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data }) => {
   return (
     <div className={`${styles.megaMenu} ${isOpen ? styles.visible : ''}`}>
       <div className={styles.megaMenuContent}>
-        {data.map((column) => (
-          <div key={column.title} className={styles.megaMenuColumn}>
+        {data.map((column: MegaMenuColumnWithId) => (
+          <div key={column.id ?? column.title + column.category} className={styles.megaMenuColumn}>
             <h4>{column.title}</h4>
             <ul>
-              {column.links.map((link) => (
-                <li key={link.name}>
-                  <Link href={link.href}>{link.name}</Link>
+              {column.links.map((link: MegaMenuLinkWithId) => (
+                <li key={link.id ?? link.href + link.name}>
+                  <Link href={link.href}>
+                    {link.name}
+                  </Link>
                 </li>
               ))}
             </ul>
