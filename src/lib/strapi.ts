@@ -1,51 +1,22 @@
-// Types for MegaMenu
-export interface MegaMenuLink {
-  name: string;
-  href: string;
-}
+// src/lib/strapi.ts
+import { StrapiResponse,
+         Product,
+         ProductTile,
+         StrapiProductTileResponse,
+         ProductMenuDataApiResponse,
+         ProductCategory,
+         ProductLink,
+         MegaMenuColumn } from '@/types/strapi';
+import { notFound } from 'next/navigation';
+import qs from 'qs';
+import { getStrapiURL } from './config';
 
-export interface MegaMenuColumn {
-  title: string;
-  category: string;
-  links: MegaMenuLink[];
-}
-
-/**
- * Fetches mega menu data from Strapi API and maps it to MegaMenuColumn[]
- * @returns A promise that resolves to an array of MegaMenuColumn
- */
-// Strapi API response types for categories
-interface StrapiLinkAttributes {
-  name: string;
-  href: string;
-}
-
-interface StrapiLink {
-  id: number;
-  attributes: StrapiLinkAttributes;
-}
-
-interface StrapiCategoryAttributes {
-  title: string;
-  category: string;
-  links: {
-    data: StrapiLink[];
-  };
-}
-
-interface StrapiCategory {
-  id: number;
-  attributes: StrapiCategoryAttributes;
-}
-
-interface StrapiCategoryResponse {
-  data: StrapiCategory[];
-}
 
 export async function fetchMegaMenuData(): Promise<MegaMenuColumn[]> {
   const query = "/api/categories?fields[0]=title&fields[1]=category&populate[0]=links";
   const fullUrl = `${getStrapiURL()}${query}`;
   console.log(`Fetching mega menu data from URL: ${fullUrl}`);
+
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
     if (!res.ok) {
@@ -53,31 +24,28 @@ export async function fetchMegaMenuData(): Promise<MegaMenuColumn[]> {
       console.error(`Failed to fetch mega menu data. URL: ${fullUrl}. Status: ${res.status}. Response: ${errorText}`);
       return [];
     }
-    const json: StrapiCategoryResponse = await res.json();
+
+    const json: ProductMenuDataApiResponse = await res.json();
     if (!json.data) {
       console.warn(`No mega menu data found.`);
       return [];
     }
-    // Map Strapi response to MegaMenuColumn[]
-    return json.data.map((item) => ({
-      title: item.attributes?.title || '',
-      category: item.attributes?.category || '',
-      links: (item.attributes?.links?.data || []).map((link) => ({
-        name: link.attributes?.name || '',
-        href: link.attributes?.href || '#',
+
+    
+return json.data.map((item: ProductCategory) => ({
+      title: item.title || '',
+      category: item.category || '',
+      links: (item.links || []).map((link: ProductLink) => ({
+        name: link.name || '',
+        href: link.href || '#',
       })),
     }));
+
   } catch (error) {
     console.error("Strapi fetch error (mega menu):", error);
     return [];
   }
 }
-// src/lib/strapi.ts
-import { StrapiResponse, Product } from '@/types/strapi';
-import { notFound } from 'next/navigation';
-import qs from 'qs';
-import { getStrapiURL } from './config';
-import { ProductTile, StrapiProductTileResponse } from '@/types/strapi';
 
 
 /**
@@ -128,8 +96,6 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
-
-    console.log("Response:", res);
     
 
     if (!res.ok) {
@@ -164,51 +130,52 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
  * 
  * @returns A promise that resolves to an array of products.
  */
-export async function fetchAllProducts(): Promise<Product[]> {
-  const query = qs.stringify(
-    {
-      fields: ['title', 'slug', 'category', 'price', 'shortDescription'],
-      populate: {
-        content: {
-          on: {
-            "product.hero-section": { populate: ["image"] },
-          },
-        },
-        category: {
-          fields: ['name']
-        }
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
+// export async function fetchAllProducts(): Promise<Product[]> {
+//   const query = qs.stringify(
+//     {
+//       fields: ['title', 'slug', 'category', 'price', 'shortDescription'],
+//       populate: {
+//         content: {
+//           on: {
+//             "product.hero-section": { populate: ["image"] },
+//           },
+//         },
+//         category: {
+//           fields: ['name']
+//         }
+//       },
+//     },
+//     {
+//       encodeValuesOnly: true,
+//     }
+//   );
 
-  const fullUrl = `${getStrapiURL()}api/products?${query}`;
-  console.log(`Fetching all products from URL: ${fullUrl}`);
+//   const fullUrl = `${getStrapiURL()}api/products?${query}`;
+//   console.log(`Fetching all products from URL: ${fullUrl}`);
+//   console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
   
-  try {
-    const res = await fetch(fullUrl, { next: { revalidate: 60 } });
+//   try {
+//     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
 
-    if (!res.ok) {
-      const errorText = await res.text();
-      console.error(`Failed to fetch all products. URL: ${fullUrl}. Status: ${res.status}. Response: ${errorText}`);
-      throw new Error('Failed to fetch products data.');
-    }
+//     if (!res.ok) {
+//       const errorText = await res.text();
+//       console.error(`Failed to fetch all products. URL: ${fullUrl}. Status: ${res.status}. Response: ${errorText}`);
+//       throw new Error('Failed to fetch products data.');
+//     }
 
-    const json: StrapiResponse = await res.json();
+//     const json: StrapiResponse = await res.json();
 
-    if (!json.data) {
-      console.warn(`No products data found.`);
-      return [];
-    }
+//     if (!json.data) {
+//       console.warn(`No products data found.`);
+//       return [];
+//     }
 
-    return json.data;
-  } catch (error) {
-    console.error("Strapi fetch error:", error);
-    throw new Error('An unexpected error occurred while fetching products.');
-  }
-}
+//     return json.data;
+//   } catch (error) {
+//     console.error("Strapi fetch error:", error);
+//     throw new Error('An unexpected error occurred while fetching products.');
+//   }
+// }
 
 
 /**
@@ -224,10 +191,11 @@ export async function fetchAllProductTiles(): Promise<ProductTile[]> {
   
   const fullUrl = `${getStrapiURL()}${query}`;
   console.log(`Fetching all product tiles from URL: ${fullUrl}`);
+  console.log('--------------------------------------------------------------------------------------')
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
-    console.log("Response:", res);
+    
 
     if (!res.ok) {
       const errorText = await res.text();

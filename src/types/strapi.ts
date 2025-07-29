@@ -231,3 +231,33 @@ export interface StrapiProductTileResponse {
     };
   };
 }
+
+// Types for Product Mega Menu Data
+interface MegaMenuLink {
+  name: string;
+  href: string;
+}
+
+export interface MegaMenuColumn {
+  title: string;
+  category: string;
+  links: MegaMenuLink[];
+}
+
+export interface ProductLink {
+  id: number;
+  name: string;
+  href: string;
+}
+
+export interface ProductCategory {
+  id: number;
+  title: string;
+  category: string;
+  links: ProductLink[];
+}
+
+export interface ProductMenuDataApiResponse {
+  data: ProductCategory[];
+}
+
