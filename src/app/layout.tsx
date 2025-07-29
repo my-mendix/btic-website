@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";;
 
 import Header from '@/components/Layouts/Header';
-import SubHeader from '@/components/Layouts/SubHeader';
+// import SubHeader from '@/components/Layouts/SubHeader';
 import Footer from '@/components/Layouts/Footer';
 import { fetchMegaMenuData } from '@/lib/strapi';
 
@@ -29,15 +29,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const megaMenuData = await fetchMegaMenuData();
-
-  console.log("Mega Menu Data:", megaMenuData);
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <SubHeader megaMenuData={megaMenuData} />
+        <Header megaMenuData={megaMenuData} />
+        {/* <SubHeader megaMenuData={megaMenuData} /> */}
         {children}
         <Footer />
       </body>

@@ -18,7 +18,8 @@ const ProductListPage: React.FC<Props> = ({ products }) => {
     const uniqueCategories = new Set(products.map(p => p.Category));
     return Array.from(uniqueCategories);
   }, [products]);
-
+  console.log('Categories:', categories);
+ 
   // Filter the products based on the active category
   const filteredProducts = useMemo(() => {
     if (activeCategory === "All Products") {

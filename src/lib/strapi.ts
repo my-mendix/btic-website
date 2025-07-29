@@ -15,7 +15,7 @@ import { getStrapiURL } from './config';
 export async function fetchMegaMenuData(): Promise<MegaMenuColumn[]> {
   const query = "/api/categories?fields[0]=title&fields[1]=category&populate[0]=links";
   const fullUrl = `${getStrapiURL()}${query}`;
-  console.log(`Fetching mega menu data from URL: ${fullUrl}`);
+  // console.log(`Fetching mega menu data from URL: ${fullUrl}`);
 
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
@@ -92,7 +92,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   );
 
   const fullUrl = `${getStrapiURL()}/api/products?${query}`;
-  console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
+  // console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
@@ -190,8 +190,7 @@ export async function fetchAllProductTiles(): Promise<ProductTile[]> {
   const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=Category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
   
   const fullUrl = `${getStrapiURL()}${query}`;
-  console.log(`Fetching all product tiles from URL: ${fullUrl}`);
-  console.log('--------------------------------------------------------------------------------------')
+  // console.log(`Fetching all product tiles from URL: ${fullUrl}`);
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });

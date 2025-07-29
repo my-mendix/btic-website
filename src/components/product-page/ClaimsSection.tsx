@@ -49,9 +49,7 @@ function renderRichText(nodes: RichTextNode[]) {
 
 const ClaimsSection: React.FC<ClaimsSectionProps> = ({ data }) => {
   const imageUrl = getStrapiMedia(data.image?.url) || '/images/travel_images/travel-claims.png';
-    console.log('Cliam Section imageUrl :', imageUrl);
-  const button = data.buttons[0]; // Only the first button shown in screenshot
-
+  const button = data.buttons[0]; 
   return (
     <section className={styles.claimsSection}>
       <div className={styles.claimsGrid}>

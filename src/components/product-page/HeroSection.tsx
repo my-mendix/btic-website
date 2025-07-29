@@ -16,7 +16,6 @@ const HeroSection: React.FC<Props> = ({ data }) => {
   const imageUrl = getStrapiMedia(data.image.data);
   const fallbackImageUrl = '/images/travel_images/travel-product-page-web.jpg';
   const imageAlt = data.image.data?.alternativeText ?? 'Product image';
-  console.log("imageurl in hero section:",  imageUrl);
 
   return (
     <section className={styles.heroSection}>

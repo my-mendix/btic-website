@@ -36,7 +36,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData }) => {
             <Link href="/products" className={styles.navButton}>Products</Link>
             <MegaMenu isOpen={isMenuOpen} data={megaMenuData} />
           </div>
-          <Link href="/medical-network" className={styles.navButton}>Medical Network</Link>
+          {/* <Link href="/medical-network" className={styles.navButton}>Medical Network</Link> */}
         </div>
         
         <div className={styles.spacer} />

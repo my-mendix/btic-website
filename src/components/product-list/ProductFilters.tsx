@@ -10,7 +10,10 @@ interface Props {
 
 const ProductFilters: React.FC<Props> = ({ categories, activeCategory, onFilterChange }) => {
   // Define a specific order for categories
-  const categoryOrder = ["All Products", "Motor", "Property & Casualty", "Travel", "Life & Medical"];
+  // const categoryOrder = ["All Products", "Motor", "Property&Casualty", "Travel", "Life&Medical"];
+  const categoryOrder = [...categories].sort((a, b) => a.localeCompare(b));
+  categoryOrder.unshift("All Products");
+
   const sortedCategories = categoryOrder.filter(cat => cat === "All Products" || categories.includes(cat));
 
   return (
