@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'next/link';
 import styles from '@/app/products/[slug]/ProductPage.module.css';
 import { FaArrowRight, FaDownload } from 'react-icons/fa';
-import { CoverageListComponent, DownloadsBlockComponent } from '@/types/strapi';
+import { CoverageListComponent, DownloadsBlockComponent } from '@/types/strapiResponseDataTypes';
 
 interface Props {
   coverageData: CoverageListComponent; // In the future, this will hold a list of items

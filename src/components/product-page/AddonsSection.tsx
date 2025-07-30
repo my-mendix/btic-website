@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import styles from './AddonsSection.module.css';
-import { AddonsSectionComponent } from '@/types/strapi';
+import { AddonsSectionComponent } from '@/types/strapiResponseDataTypes';
 import { getStrapiMedia } from '@/lib/media'; 
 
 interface AddonsSectionProps {

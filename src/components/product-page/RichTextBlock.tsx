@@ -1,4 +1,4 @@
-import { RichTextNode } from "@/types/strapi";;
+import { RichTextNode } from "@/types/strapiResponseDataTypes";;
 import styles from '@/app/ProductPage.module.css';
 
 const RichTextBlock = ({ nodes }: { nodes: RichTextNode[] }) => (

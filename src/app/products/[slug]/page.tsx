@@ -1,7 +1,7 @@
 // src/app/individual-products/page.tsx
 import { fetchAllProductTiles } from '@/lib/strapi'; 
 import ProductListPage from '@/components/product-list/ProductListPage';
-import { ProductTile } from '@/types/strapi';
+import { ProductTile } from '@/types/strapiResponseDataTypes';
 
 // This is a Server Component
 async function ProductsPage({
@@ -14,10 +14,10 @@ async function ProductsPage({
 
   // 1. Fetch data on the server 
   const products = await fetchAllProductTiles();
-  console.log('Fetched products:', products);
+  // console.log('Fetched products:', products);
 
   const filteredProducts = products.filter((item: ProductTile) => item.category === slug);
-  console.log('Filtered Products:', filteredProducts);
+  // console.log('Filtered Products:', filteredProducts);
   console.log('Slug:', slug);
   
 

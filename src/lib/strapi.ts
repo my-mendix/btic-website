@@ -6,7 +6,7 @@ import { StrapiResponse,
          ProductMenuDataApiResponse,
          ProductCategory,
          ProductLink,
-         MegaMenuColumn } from '@/types/strapi';
+         MegaMenuColumn } from '@/types/strapiResponseDataTypes';
 import { notFound } from 'next/navigation';
 import qs from 'qs';
 import { getStrapiURL } from './config';

@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './DownloadsBlock.module.css';
 import { FaDownload } from 'react-icons/fa';
-import { DownloadsBlockComponent } from '@/types/strapi';
+import { DownloadsBlockComponent } from '@/types/strapiResponseDataTypes';
 
 interface DownloadsBlockProps {
   data: DownloadsBlockComponent;

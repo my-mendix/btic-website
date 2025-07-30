@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react';
 import styles from './ProductListPage.module.css';
-import { ProductTile } from '@/types/strapi';
+import { ProductTile } from '@/types/strapiResponseDataTypes';
 import ProductCard from './ProductCard';
 import ProductFilters from './ProductFilters';
 

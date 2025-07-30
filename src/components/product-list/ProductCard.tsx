@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ProductTile } from '@/types/strapi'; // <-- Use the correct type
+import { ProductTile } from '@/types/strapiResponseDataTypes'; // <-- Use the correct type
 import styles from './ProductListPage.module.css'; // <-- Assuming this is your CSS module
 import { getStrapiURL } from '@/lib/config'; // <-- Assuming this is your helper
 

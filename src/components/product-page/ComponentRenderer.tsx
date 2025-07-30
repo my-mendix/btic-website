@@ -1,4 +1,4 @@
-import { ProductComponent } from "@/types/strapi";
+import { ProductComponent } from "@/types/strapiResponseDataTypes";
 import React from "react";
 
 import HeroSection from "./HeroSection";

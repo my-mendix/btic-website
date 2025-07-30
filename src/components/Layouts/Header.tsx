@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState , useEffect} from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './Header.module.css';
@@ -13,6 +13,18 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ megaMenuData }) => {
   const [openMenu, setOpenMenu] = useState<'individual' | 'corporate' | 'about' | null>(null);
+  
+useEffect(() => {
+    const handleClickOutside = () => {
+      setOpenMenu(null);
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
 
   return (
     <header className={styles.header}>

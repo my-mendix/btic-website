@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import styles from "@/app/ProductPage.module.css";
 import Image from "next/image";
-import { Faq } from "@/types/strapi";
+import { Faq } from "@/types/strapiResponseDataTypes";
 import RichTextBlock from "./RichTextBlock";
 
 interface Props {

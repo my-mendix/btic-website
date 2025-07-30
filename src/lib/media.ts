@@ -1,5 +1,5 @@
 // src/lib/media.ts
-import { StrapiMedia } from '@/types/strapi';
+import { StrapiMedia } from '@/types/strapiResponseDataTypes';
 import { getStrapiURL } from './config';
 
 /**

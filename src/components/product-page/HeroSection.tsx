@@ -1,6 +1,6 @@
 
 // src/components/product-page/HeroSection.tsx
-import { HeroSectionComponent } from "@/types/strapi";
+import { HeroSectionComponent } from "@/types/strapiResponseDataTypes";
 import { getStrapiMedia } from '@/lib/media';
 import RichTextBlock from "./RichTextBlock";
 import styles from './HeroSection.module.css';
