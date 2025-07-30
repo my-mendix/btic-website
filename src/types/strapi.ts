@@ -214,7 +214,8 @@ export interface ProductTile {
   Title: string;
   shortDescription: string; // This is a simple string now
   Price: string;
-  Category: string;
+  group: string;
+  category: string;
   image: ProductImage;
   Buttons: ProductButton[];
 }

@@ -1,52 +1,31 @@
-// src/app/products/[slug]/page.tsx
-import { fetchProductBySlug } from '@/lib/strapi';
-import ComponentRenderer from '@/components/product-page/ComponentRenderer';
-import RichTextBlock from '@/components/product-page/RichTextBlock';
-import styles from '@/app/ProductPage.module.css';
-import FaqSection from '@/components/product-page/FaqSection';
+// src/app/individual-products/page.tsx
+import { fetchAllProductTiles } from '@/lib/strapi'; 
+import ProductListPage from '@/components/product-list/ProductListPage';
+import { ProductTile } from '@/types/strapi';
 
-// It's crucial to correctly type the `params` prop as a Promise
-// and ensure the component is an 'async' function, as it is a server component.
-export default async function ProductPage({ 
+// This is a Server Component
+async function ProductsPage({
   params 
 }: { 
   params: Promise<{ slug: string }>; // Type 'params' as a Promise
 }) {
   // Await 'params' to resolve the Promise and get the actual object
   const { slug } = await params; 
+
+  // 1. Fetch data on the server 
+  const products = await fetchAllProductTiles();
+  console.log('Fetched products:', products);
+
+  const filteredProducts = products.filter((item: ProductTile) => item.category === slug);
+  console.log('Filtered Products:', filteredProducts);
+  console.log('Slug:', slug);
   
-  const product = await fetchProductBySlug(slug);
 
-  const faqs = (product.faqs as unknown as { id: number; faq_question: string; faq_answers: string }[]).map((faq) => ({
-    id: faq.id,
-    question: faq.faq_question,
-    answer: faq.faq_answers.split('\n').map(line => ({
-      type: 'paragraph' as const,
-      children: [{ type: 'text' as const, text: line }],
-    })),
-  }));
-
+  // console.log('Fetched products:', products);
+  // 2. Pass the correctly typed data as props to the interactive Client Component
   return (
-    <main className={styles.pageContainer}>
-      {/* Short Description */}
-      {product?.shortDescription?.length > 0 && (
-        <section className={styles.introSection}>
-          <RichTextBlock nodes={product.shortDescription} />
-        </section>
-      )}
-
-      {/* Content Blocks */}
-      {Array.isArray(product?.content) &&
-        product.content.map(component => (
-          <ComponentRenderer
-            key={`${component.__component}-${component.id}`}
-            component={component}
-          />
-        ))}
-
-      {/* FAQ Section */}
-      <FaqSection faqs={faqs} />
-      
-    </main>
-  );
+      <ProductListPage products={filteredProducts} slug={slug} />
+    );
 }
+
+export default ProductsPage;

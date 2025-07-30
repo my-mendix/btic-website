@@ -187,7 +187,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
 
 export async function fetchAllProductTiles(): Promise<ProductTile[]> {
   // This query exactly matches the one you provided
-  const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=Category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
+  const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=group&fields[4]=category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
   
   const fullUrl = `${getStrapiURL()}${query}`;
   // console.log(`Fetching all product tiles from URL: ${fullUrl}`);

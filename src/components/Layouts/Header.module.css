@@ -26,6 +26,13 @@
   color: #fff;
 }
 
+.navLinks {
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  gap: 8px;
+}
+
 .topNav,
 .topRight {
   display: flex;

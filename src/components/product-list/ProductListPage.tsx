@@ -8,39 +8,50 @@ import ProductFilters from './ProductFilters';
 
 interface Props {
   products: ProductTile[];
+  slug : string;
 }
 
-const ProductListPage: React.FC<Props> = ({ products }) => {
-  const [activeCategory, setActiveCategory] = useState("All Products");
+const ProductListPage: React.FC<Props> = ({ products , slug}) => {
+  const [activeGroup, setActiveGroup] = useState("All Products");
 
   // Get a unique list of categories from the products
-  const categories = useMemo(() => {
-    const uniqueCategories = new Set(products.map(p => p.Category));
-    return Array.from(uniqueCategories);
+  const groups = useMemo(() => {
+    const uniquegroups = new Set(products.map(p => p.group));
+    return Array.from(uniquegroups);
   }, [products]);
-  console.log('Categories:', categories);
  
   // Filter the products based on the active category
   const filteredProducts = useMemo(() => {
-    if (activeCategory === "All Products") {
+    if (activeGroup === "All Products") {
       return products;
     }
-    return products.filter(p => p.Category === activeCategory);
-  }, [products, activeCategory]);
+    return products.filter(p => p.group === activeGroup);
+  }, [products, activeGroup]);
 
   return (
     <div className={styles.pageContainer}>
-      <header className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Individual Products</h1>
-        <p className={styles.pageDescription}>
-          You will be able to plan and to live your life in greater confidence if you have a reliable insurance coverage. At Boubyan Takaful, we are committed to provide you and your family with comprehensive and cost-effective insurance solutions that are perfectly tailored to your personal needs.
-        </p>
-      </header>
+      
+{slug === "individual" ? (
+        <header className={styles.pageHeader}>
+          <h1 className={styles.pageTitle}>Individual Products</h1>
+          <p className={styles.pageDescription}>
+            You will be able to plan and to live your life in greater confidence if you have a reliable insurance coverage. At Boubyan Takaful, we are committed to provide you and your family with comprehensive and cost-effective insurance solutions that are perfectly tailored to your personal needs.
+          </p>
+        </header>
+      ) : slug === "corporate" ? (
+        <header className={styles.pageHeader}>
+          <h1 className={styles.pageTitle}>Corporate Products</h1>
+          <p className={styles.pageDescription}>
+            As a leading insurance provider with vast experience in serving a wide range of distinctive corporates, Boubyan Takaful is here to help you build and secure your company by offering customized insurance solutions to cater your needs and your budget.
+          </p>
+        </header>
+      ) : null}
+
 
       <ProductFilters
-        categories={categories}
-        activeCategory={activeCategory}
-        onFilterChange={setActiveCategory}
+        categories={groups}
+        activeCategory={activeGroup}
+        onFilterChange={setActiveGroup}
       />
 
       <div className={styles.productGrid}>
