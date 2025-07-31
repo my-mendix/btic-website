@@ -12,28 +12,28 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const imageUrl = product.image ? `${getStrapiURL()}${product.image.url}` : '/images/placeholder.png';
+  const imageUrl = product.cardImage ? `${getStrapiURL()}${product.cardImage.url}` : '/images/placeholder.png';
 
   // Find the specific buttons from the array
-  const detailsButton = product.Buttons.find(button => button.label.toLowerCase() === 'details');
-  const buyNowButton = product.Buttons.find(button => button.label.toLowerCase() === 'buy now');
+  const detailsButton = product.cardButtons.find(button => button.label.toLowerCase() === 'details');
+  const buyNowButton = product.cardButtons.find(button => button.label.toLowerCase() === 'buy now');
 
   return (
     <div className={styles.card}>
       <div className={styles.cardImageContainer}>
         <Image
           src={imageUrl}
-          alt={product.Title}
+          alt={product.title}
           className={styles.cardImage}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
       </div>
       <div className={styles.cardContent}>
-        <h3 className={styles.cardTitle}>{product.Title}</h3>
+        <h3 className={styles.cardTitle}>{product.title}</h3>
         <p className={styles.cardDescription}>{product.shortDescription}</p>
         <div className={styles.cardFooter}>
-          <div className={styles.priceInfo}>{product.Price}</div>
+          <div className={styles.priceInfo}>Starting From {product.minimumPrice} KD</div>
           <div className={styles.buttonGroup}>
             {detailsButton && (
               <Link href={detailsButton.url} className={styles.detailsButton}>

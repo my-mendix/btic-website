@@ -5,7 +5,7 @@ import "./globals.css";;
 import Header from '@/components/Layouts/Header';
 // import SubHeader from '@/components/Layouts/SubHeader';
 import Footer from '@/components/Layouts/Footer';
-import { fetchMegaMenuData } from '@/lib/strapi';
+import { fetchMainMenuData } from '@/lib/strapi';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,13 +28,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const megaMenuData = await fetchMegaMenuData();
+  const mainMenuData = await fetchMainMenuData();
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header megaMenuData={megaMenuData} />
+        <Header mainMenuData={mainMenuData} />
         {/* <SubHeader megaMenuData={megaMenuData} /> */}
         {children}
         <Footer />

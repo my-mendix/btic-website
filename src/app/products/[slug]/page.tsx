@@ -16,7 +16,7 @@ async function ProductsPage({
   const products = await fetchAllProductTiles();
   // console.log('Fetched products:', products);
 
-  const filteredProducts = products.filter((item: ProductTile) => item.category === slug);
+  const filteredProducts = products.filter((item: ProductTile) => item.category.toLowerCase() === slug);
   // console.log('Filtered Products:', filteredProducts);
   console.log('Slug:', slug);
   

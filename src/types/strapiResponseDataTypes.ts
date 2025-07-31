@@ -211,13 +211,13 @@ export interface ProductImage {
 // The main object for a single product tile
 export interface ProductTile {
   id: number;
-  Title: string;
+  title: string;
   shortDescription: string; // This is a simple string now
-  Price: string;
+  minimumPrice: string;
   group: string;
   category: string;
-  image: ProductImage;
-  Buttons: ProductButton[];
+  cardImage: ProductImage;
+  cardButtons: ProductButton[];
 }
 
 // The top-level response from the /api/product-tiles endpoint
@@ -234,15 +234,15 @@ export interface StrapiProductTileResponse {
 }
 
 // Types for Product Mega Menu Data
-interface MegaMenuLink {
+interface MainMenuLink {
   name: string;
   href: string;
 }
 
-export interface MegaMenuColumn {
+export interface MainMenuColumn {
   title: string;
   category: string;
-  links: MegaMenuLink[];
+  links: MainMenuLink[];
 }
 
 export interface ProductLink {

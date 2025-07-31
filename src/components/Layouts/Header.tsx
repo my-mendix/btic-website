@@ -8,10 +8,10 @@ import { MegaMenuColumn } from '@/data/menuData';
 import MegaMenu from './MegaMenu';
 
 interface HeaderProps {
-  megaMenuData: MegaMenuColumn[];
+  mainMenuData: MegaMenuColumn[];
 }
 
-const Header: React.FC<HeaderProps> = ({ megaMenuData }) => {
+const Header: React.FC<HeaderProps> = ({ mainMenuData }) => {
   const [openMenu, setOpenMenu] = useState<'individual' | 'corporate' | 'about' | null>(null);
   
 useEffect(() => {
@@ -49,7 +49,7 @@ useEffect(() => {
                 menuKey="individual"
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
-                megaMenuData={megaMenuData}
+                megaMenuData={mainMenuData}
               />
               <NavItemWithMenu
                 label="Corporate"
@@ -57,7 +57,7 @@ useEffect(() => {
                 menuKey="corporate"
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
-                megaMenuData={megaMenuData}
+                megaMenuData={mainMenuData}
               />
               <NavItemWithMenu
                 label="About Us"
@@ -65,7 +65,7 @@ useEffect(() => {
                 menuKey="about"
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
-                megaMenuData={megaMenuData} 
+                megaMenuData={mainMenuData} 
               />
               <Link href="/medical-network" className={styles.topNavLink}>Medical Network</Link>
 

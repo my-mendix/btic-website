@@ -1,7 +1,6 @@
 // src/app/products/[slug]/page.tsx
 import { fetchProductBySlug } from '@/lib/strapi';
 import ComponentRenderer from '@/components/product-page/ComponentRenderer';
-import RichTextBlock from '@/components/product-page/RichTextBlock';
 import styles from '@/app/ProductPage.module.css';
 import FaqSection from '@/components/product-page/FaqSection';
 
@@ -28,12 +27,6 @@ export default async function ProductPage({
 
   return (
     <main className={styles.pageContainer}>
-      {/* Short Description */}
-      {product?.shortDescription?.length > 0 && (
-        <section className={styles.introSection}>
-          <RichTextBlock nodes={product.shortDescription} />
-        </section>
-      )}
 
       {/* Content Blocks */}
       {Array.isArray(product?.content) &&

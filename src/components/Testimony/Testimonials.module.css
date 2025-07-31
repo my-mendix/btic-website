@@ -1,0 +1,156 @@
+/* src/components/home/Testimonials.module.css */
+
+.testimonialsSection {
+  padding: 60px 20px;
+  background-color: #fff;
+  position: relative;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+.sliderContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 40px; 
+}
+
+
+
+
+/* .sliderContainer {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px; 
+} */
+
+.swiperInstance {
+  padding-bottom: 50px !important; /* Space for pagination dots */
+}
+
+/* --- Card Styles --- */
+.card {
+  background-color: #fff5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 60px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.quoteIcon {
+  font-family: serif;
+  font-size: 80px;
+  font-weight: bold;
+  color: #e0e0e0;
+  line-height: 0.5;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.cardText {
+  font-size: 18px;
+  color: #555;
+  line-height: 1.7;
+  z-index: 1; /* Puts text above the quote icon */
+}
+
+/* --- Custom Swiper Navigation Arrows --- */
+.swiperButtonPrev,
+.swiperButtonNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background-color: rgba(239, 205, 205, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.swiperButtonPrev {
+  left: 0;
+}
+
+.swiperButtonNext {
+  right: 0;
+}
+
+.swiperButtonPrev:hover,
+.swiperButtonNext:hover {
+  background-color: rgba(217, 35, 49, 0.5);
+}
+
+.swiperButtonPrev::after,
+.swiperButtonNext::after {
+  font-family: 'swiper-icons';
+  font-size: 18px;
+  color: #fff;
+}
+.swiperButtonPrev::after { content: 'prev'; }
+.swiperButtonNext::after { content: 'next'; }
+
+/* --- Custom Swiper Pagination Dots --- */
+.swiperPagination {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+}
+
+/* We must use :global to style Swiper's default classes from a module */
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background-color: #d1d1d1;
+  opacity: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #d9534f;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .sliderContainer {
+    padding: 0; /* Remove padding on mobile */
+  }
+
+  /* Hide arrows on mobile and rely on swipe */
+  .swiperButtonPrev,
+  .swiperButtonNext {
+    display: none;
+  }
+}

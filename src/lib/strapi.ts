@@ -6,13 +6,13 @@ import { StrapiResponse,
          ProductMenuDataApiResponse,
          ProductCategory,
          ProductLink,
-         MegaMenuColumn } from '@/types/strapiResponseDataTypes';
+         MainMenuColumn } from '@/types/strapiResponseDataTypes';
 import { notFound } from 'next/navigation';
 import qs from 'qs';
 import { getStrapiURL } from './config';
 
 
-export async function fetchMegaMenuData(): Promise<MegaMenuColumn[]> {
+export async function fetchMainMenuData(): Promise<MainMenuColumn[]> {
   const query = "/api/categories?fields[0]=title&fields[1]=category&populate[0]=links";
   const fullUrl = `${getStrapiURL()}${query}`;
   // console.log(`Fetching mega menu data from URL: ${fullUrl}`);
@@ -61,7 +61,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   const query = qs.stringify(
     {
       filters: {
-        Slug: {
+        slug: {
           $eq: slug,
         },
       },
@@ -187,7 +187,8 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
 
 export async function fetchAllProductTiles(): Promise<ProductTile[]> {
   // This query exactly matches the one you provided
-  const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=group&fields[4]=category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
+  // const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=group&fields[4]=category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
+  const query = "/api/products?fields[0]=title&fields[1]=shortDescription&fields[2]=minimumPrice&fields[3]=group&fields[4]=category&populate[cardImage][fields][0]=url&populate[cardImage][fields][1]=name&populate[cardButtons][fields][0]=label&populate[cardButtons][fields][1]=url";
   
   const fullUrl = `${getStrapiURL()}${query}`;
   // console.log(`Fetching all product tiles from URL: ${fullUrl}`);
@@ -203,6 +204,7 @@ export async function fetchAllProductTiles(): Promise<ProductTile[]> {
     }
 
     const json: StrapiProductTileResponse = await res.json();
+    console.log(`Received product tiles data:`, json.data);
 
     if (!json.data) {
       console.warn(`No product tiles data found.`);
