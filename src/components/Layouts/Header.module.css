@@ -179,6 +179,30 @@
   color: #d9534f;
 }
 
+.menuBoxLink {
+  text-decoration: none;
+  display: block;
+}
+
+.menuBox {
+  /* padding: 4px 4px 4px 4px; */
+  /* margin: 8px 4px; */
+  background-color: white;
+  /* border: 1px solid #ccc; */
+  border-radius: 6px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  color: black;
+}
+
+.menuBox:hover {
+  background-color: rgb(252, 228, 228);
+  color: rgb(0, 0, 0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
 /* --- RESPONSIVE HIDING --- */
 /* On screens 1024px or less, hide the entire Header component */
 @media (max-width: 1024px) {

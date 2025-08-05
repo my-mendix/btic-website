@@ -14,6 +14,9 @@ import { getStrapiURL } from './config';
 
 
 export async function fetchMainMenuData(): Promise<MainMenuColumn[]> {
+  console.log('-----------------------------------------------------');
+  console.log('executing fetchMainMenuData function');
+  console.log('-----------------------------------------------------');
   const query = "/api/categories?fields[0]=title&fields[1]=category&populate[0]=links";
   const fullUrl = `${getStrapiURL()}${query}`;
   // console.log(`Fetching mega menu data from URL: ${fullUrl}`);
@@ -62,6 +65,9 @@ return json.data.map((item: ProductCategory) => ({
  * @returns A promise that resolves to the product data.
  */
 export async function fetchProductBySlug(slug: string): Promise<Product> {
+  console.log('-----------------------------------------------------');
+  console.log('executing fetchProductBySlug function');
+  console.log('-----------------------------------------------------');
   const query = qs.stringify(
     {
       filters: {
@@ -85,7 +91,13 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
             },
           },
         },
-        // ProductHeroSection: { populate: ["image"] },
+        hero: {
+          populate: {
+            image: {
+              fields: ["url", "alternativeText"]
+            }
+          }
+        },
         seo: { populate: "*" },
         faqs: { populate: "*" },
       },
@@ -96,7 +108,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   );
 
   const fullUrl = `${getStrapiURL()}/api/products?${query}`;
-  // console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
+  console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
@@ -135,6 +147,9 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
  * @returns A promise that resolves to an array of products.
  */
 export async function fetchAllProducts(): Promise<Product[]> {
+  console.log('-----------------------------------------------------');
+  console.log('Executeing fetchAllProducts function');
+  console.log('-----------------------------------------------------');
   const query = qs.stringify(
     {
       fields: ['title', 'slug', 'category', 'price', 'shortDescription'],
@@ -190,12 +205,15 @@ export async function fetchAllProducts(): Promise<Product[]> {
  */
 
 export async function fetchAllProductTiles(): Promise<ProductTile[]> {
+  console.log('-----------------------------------------------------');
+  console.log('Executing fetchAllProductTiles function');
+  console.log('-----------------------------------------------------');
   // This query exactly matches the one you provided
   // const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=group&fields[4]=category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
   const query = "/api/products?fields[0]=title&fields[1]=shortDescription&fields[2]=minimumPrice&fields[3]=group&fields[4]=category&populate[cardImage][fields][0]=url&populate[cardImage][fields][1]=name&populate[cardButtons][fields][0]=label&populate[cardButtons][fields][1]=url";
   
   const fullUrl = `${getStrapiURL()}${query}`;
-  // console.log(`Fetching all product tiles from URL: ${fullUrl}`);
+  console.log(`Fetching all product tiles from URL: ${fullUrl}`);
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });

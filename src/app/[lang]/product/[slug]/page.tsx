@@ -3,6 +3,7 @@ import { fetchProductBySlug } from '@/lib/strapi';
 import ComponentRenderer from '@/components/product-page/ComponentRenderer';
 import styles from '@/app/ProductPage.module.css';
 import FaqSection from '@/components/product-page/FaqSection';
+import Hero from '@/components/product-page/Hero';
 
 // It's crucial to correctly type the `params` prop as a Promise
 // and ensure the component is an 'async' function, as it is a server component.
@@ -41,6 +42,7 @@ export default async function ProductPage({
 
       {/* FAQ Section */}
       <FaqSection faqs={faqs} />
+      {product.hero && <Hero {...product.hero} lang={lang} />}
       
     </main>
   );

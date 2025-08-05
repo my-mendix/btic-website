@@ -12,6 +12,11 @@ import { getStrapiURL } from './config';
  * @returns The full URL of the media, or null if the media is invalid.
  */
 export const getStrapiMedia = (media: StrapiMedia | null | undefined): string | null => {
+  console.log('-----------------------------------------------------');
+  console.log('Executing getStrapiMedia function');
+  console.log('Media object:', JSON.stringify(media, null, 2));
+  console.log('media url: ', media?.url );
+  console.log('-----------------------------------------------------');
   if (!media?.url) return null;
 
   // If the URL is already absolute, return it directly.

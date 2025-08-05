@@ -132,6 +132,7 @@ const NavItemWithMenu: React.FC<NavItemWithMenuProps> = ({
         {lang === 'ar' ? labelAr : label}
       </div>
       </Link>
+      
       {hasMenu && <MegaMenu isOpen={openMenu === menuKey} data={filteredMegaMenuData} />}
     </div>
   );

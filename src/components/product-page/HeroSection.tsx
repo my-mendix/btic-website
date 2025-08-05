@@ -17,6 +17,12 @@ const HeroSection: React.FC<Props> = ({ data }) => {
   const fallbackImageUrl = '/images/travel_images/travel-product-page-web.jpg';
   const imageAlt = data.image.data?.alternativeText ?? 'Product image';
 
+  console.log('HeroSection data:', JSON.stringify(data, null, 2));
+  console.log('Image URL:', imageUrl);
+  console.log('----------------------------------------------------------');
+  console.log('data.image:', JSON.stringify(data.image, null, 2));
+
+
   return (
     <section className={styles.heroSection}>
         <div className={styles.heroGrid}>            

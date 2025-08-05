@@ -49,21 +49,8 @@ export interface StrapiMedia {
   caption: string | null;
   width: number;
   height: number;
-  formats: {
-    thumbnail?: ImageFormat;
-    small?: ImageFormat;
-    medium?: ImageFormat;
-    large?: ImageFormat;
-  } | null;
-  hash: string;
-  ext: string;
-  mime: string;
   size: number;
   url: string;
-  previewUrl: string | null;
-  provider: string;
-  createdAt: string;
-  updatedAt: string;
 }
 
 // Wrapper for media responses where the media object is nested under a `data` property.
@@ -83,6 +70,8 @@ export interface HeroSectionComponent {
   image: StrapiMediaResponse;
   buttons: Button[];
 }
+
+
 
 export interface CoverageListComponent {
   __component: "product.coverage-list";
@@ -146,10 +135,20 @@ export interface Product {
   shortDescription: RichTextNode[];
   content: ProductComponent[];
   faqs: { data: Faq[] };
+  hero: HeroComponent;
   seo: Seo;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
+}
+
+export interface HeroComponent {
+  id: number;
+  title: string;
+  titleAr: string;
+  description: string;
+  descriptionAr: string;
+  image: StrapiMedia;
 }
 
 export interface StaticProduct {
@@ -267,4 +266,3 @@ export interface ProductCategory {
 export interface ProductMenuDataApiResponse {
   data: ProductCategory[];
 }
-

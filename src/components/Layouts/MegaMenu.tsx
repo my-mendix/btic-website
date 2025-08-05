@@ -35,8 +35,10 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data }) => {
             <ul>
               {column.links.map((link: MegaMenuLinkWithId) => (
                 <li key={link.id ?? link.href + link.name}>
-                  <Link href={link.href}>
-                    {link.name}
+                  <Link href={link.href} className={styles.menuBoxLink}>               
+                    <div className={styles.menuBox}>                
+                          {link.name}
+                    </div>
                   </Link>
                 </li>
               ))}
