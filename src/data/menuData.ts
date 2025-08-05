@@ -2,7 +2,9 @@
 
 export interface MegaMenuLink {
   name: string;
+  nameAr: string;
   href: string;
+  hrefAr: string;
 }
 
 export interface MegaMenuColumn {

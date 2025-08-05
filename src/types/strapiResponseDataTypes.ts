@@ -237,10 +237,13 @@ export interface StrapiProductTileResponse {
 interface MainMenuLink {
   name: string;
   href: string;
+  nameAr: string;
+  hrefAr: string;
 }
 
 export interface MainMenuColumn {
   title: string;
+  titleAr: string;
   category: string;
   links: MainMenuLink[];
 }
@@ -248,12 +251,15 @@ export interface MainMenuColumn {
 export interface ProductLink {
   id: number;
   name: string;
+  nameAr: string;
   href: string;
+  hrefAr: string;
 }
 
 export interface ProductCategory {
   id: number;
   title: string;
+  titleAr: string;
   category: string;
   links: ProductLink[];
 }

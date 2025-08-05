@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";;
+import '@/app/globals.css';
 
 import Header from '@/components/Layouts/Header';
 // import SubHeader from '@/components/Layouts/SubHeader';
@@ -23,18 +23,28 @@ export const metadata: Metadata = {
 };
 
 
-export default async function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
-  const mainMenuData = await fetchMainMenuData();
+  params: {
+    lang: string;
+  };
+}
+
+
+
+export default async function RootLayout({ children, params }: RootLayoutProps) {
+  const { lang } = await params;
+  console.log('Language:', lang);
+  const mainMenuData = await fetchMainMenuData(); // optionally pass lang to fetch localized menu
+  // console.log('Main Menu Data:', mainMenuData);
+
   return (
-    <html lang="en">
+
+    <html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header mainMenuData={mainMenuData} />
+        <Header mainMenuData={mainMenuData}  lang={lang}/>
         {/* <SubHeader megaMenuData={megaMenuData} /> */}
         {children}
         <Footer />

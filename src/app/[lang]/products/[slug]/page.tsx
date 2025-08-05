@@ -3,14 +3,18 @@ import { fetchAllProductTiles } from '@/lib/strapi';
 import ProductListPage from '@/components/product-list/ProductListPage';
 import { ProductTile } from '@/types/strapiResponseDataTypes';
 
+
+
 // This is a Server Component
 async function ProductsPage({
   params 
 }: { 
-  params: Promise<{ slug: string }>; // Type 'params' as a Promise
+  params: Promise<{ slug: string ; lang: string;}>; // Type 'params' as a Promise
 }) {
   // Await 'params' to resolve the Promise and get the actual object
   const { slug } = await params; 
+  const { lang } = await params; 
+  console.log('lang:', lang);
 
   // 1. Fetch data on the server 
   const products = await fetchAllProductTiles();

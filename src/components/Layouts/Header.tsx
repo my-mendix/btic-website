@@ -9,9 +9,10 @@ import MegaMenu from './MegaMenu';
 
 interface HeaderProps {
   mainMenuData: MegaMenuColumn[];
+  lang: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ mainMenuData }) => {
+const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
   const [openMenu, setOpenMenu] = useState<'individual' | 'corporate' | 'about' | null>(null);
   
 useEffect(() => {
@@ -33,7 +34,7 @@ useEffect(() => {
           <div className={styles.topNav}>
             <Link href="/">
               <Image
-                src="/icons/btic_icon.svg"
+                src="/images/icons/btic_icon.svg" 
                 alt="Boubyan Takaful Logo"
                 width={80}
                 height={40}
@@ -45,27 +46,33 @@ useEffect(() => {
             {/* <div className={styles.navLinks}> */}
               <NavItemWithMenu
                 label="Individual"
+                labelAr="الأفراد"
                 href="/products/individual"
                 menuKey="individual"
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
                 megaMenuData={mainMenuData}
+                lang = {lang}
               />
               <NavItemWithMenu
                 label="Corporate"
+                labelAr="الشركات"
                 href="/products/corporate"
                 menuKey="corporate"
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
                 megaMenuData={mainMenuData}
+                lang = {lang}
               />
               <NavItemWithMenu
                 label="About Us"
+                labelAr="عن بوبيان تكافل"
                 href="/explore"
                 menuKey="about"
                 openMenu={openMenu}
                 setOpenMenu={setOpenMenu}
                 megaMenuData={mainMenuData} 
+                lang = {lang}
               />
               <Link href="/medical-network" className={styles.topNavLink}>Medical Network</Link>
 
@@ -90,20 +97,24 @@ useEffect(() => {
 
 interface NavItemWithMenuProps {
   label: string;
+  labelAr: string;
   href: string;
   menuKey: 'individual' | 'corporate' | 'about';
   openMenu: 'individual' | 'corporate' | 'about' | null;
   setOpenMenu: React.Dispatch<React.SetStateAction<'individual' | 'corporate' | 'about' | null>>;
   megaMenuData: MegaMenuColumn[];
+  lang: string;
 }
 
 const NavItemWithMenu: React.FC<NavItemWithMenuProps> = ({
   label,
+  labelAr,
   href,
   menuKey,
   openMenu,
   setOpenMenu,
   megaMenuData,
+  lang,
 }) => {
   const hasMenu = megaMenuData.length > 0;
   const filteredMegaMenuData = megaMenuData.filter((item: MegaMenuColumn) => item.category === label);
@@ -114,10 +125,12 @@ const NavItemWithMenu: React.FC<NavItemWithMenuProps> = ({
       onMouseLeave={() => hasMenu && setOpenMenu(null)}
     >
       <Link
-        href={href}
+        href={ href}
         className={openMenu === menuKey ? styles.topNavLinkActive : styles.topNavLink}
       >
-        {label}
+              <div>
+        {lang === 'ar' ? labelAr : label}
+      </div>
       </Link>
       {hasMenu && <MegaMenu isOpen={openMenu === menuKey} data={filteredMegaMenuData} />}
     </div>

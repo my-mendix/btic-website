@@ -9,11 +9,12 @@ import FaqSection from '@/components/product-page/FaqSection';
 export default async function ProductPage({ 
   params 
 }: { 
-  params: Promise<{ slug: string }>; // Type 'params' as a Promise
+  params: Promise<{ slug: string; lang: string }>; // Type 'params' as a Promise
 }) {
   // Await 'params' to resolve the Promise and get the actual object
   const { slug } = await params; 
-  
+  const { lang } = await params; 
+  console.log('Language:', lang);
   const product = await fetchProductBySlug(slug);
 
   const faqs = (product.faqs as unknown as { id: number; faq_question: string; faq_answers: string }[]).map((faq) => ({
@@ -34,6 +35,7 @@ export default async function ProductPage({
           <ComponentRenderer
             key={`${component.__component}-${component.id}`}
             component={component}
+            lang={lang} 
           />
         ))}
 
