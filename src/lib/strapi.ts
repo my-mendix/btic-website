@@ -79,7 +79,6 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
         content: {
           on: {
             "product.coverage-list": { populate: "*" },
-            "product.downloads-block": { populate: "*" },
             "product.addons-section": {
               populate: {
                 features: {
@@ -111,6 +110,13 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
         },
         seo: { populate: "*" },
         faqs: { populate: "*" },
+        download: {
+          populate: {
+            file: {
+              populate: ['file', 'file_ar']
+            }
+          }
+        }
       },
     },
     {

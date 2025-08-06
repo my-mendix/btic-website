@@ -1,8 +1,6 @@
 import { ProductComponent } from "@/types/strapiResponseDataTypes";
 import React from "react";
 import CoverageList from "./CoverageList";
-import ClaimsSection from "./ClaimsSection";
-import DownloadsBlock from "./DownloadsBlock";
 import AddonsSection from "./AddonsSection";
 
 interface Props {
@@ -15,8 +13,6 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const componentMap: { [key: string]: React.FC<any> } = {
   "product.coverage-list": CoverageList,
-  "product.claims-section": ClaimsSection,
-  "product.downloads-block": DownloadsBlock,
   "product.addons-section": AddonsSection,
 };
 

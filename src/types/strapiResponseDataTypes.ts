@@ -95,10 +95,16 @@ export interface ClaimsSectionComponent {
 }
 
 export interface DownloadsBlockComponent {
-  __component: 'product.downloads-block';
   id: number;
-  fileLabel: string;
-  file: StrapiMediaResponse;
+  title: string;
+  title_ar: string;
+  file: {
+    id: number;
+    label: string;
+    label_ar: string;
+    file: StrapiMediaResponse;
+    file_ar: StrapiMediaResponse;
+  }[];
 }
 
 export interface AddonFeature {
@@ -120,7 +126,6 @@ export type ProductComponent =
   | HeroSectionComponent
   | ClaimsSectionComponent
   | CoverageListComponent
-  | DownloadsBlockComponent
   | AddonsSectionComponent;
 
 // =================================================================
@@ -139,6 +144,7 @@ export interface Product {
   faqs: { data: Faq[] };
   hero: HeroComponent;
   claim: HeroComponent;
+  download: DownloadsBlockComponent;
   seo: Seo;
   createdAt: string;
   updatedAt: string;

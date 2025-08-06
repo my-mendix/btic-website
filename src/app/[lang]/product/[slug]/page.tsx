@@ -4,6 +4,7 @@ import ComponentRenderer from '@/components/product-page/ComponentRenderer';
 import styles from '@/app/ProductPage.module.css';
 import FaqSection from '@/components/product-page/FaqSection';
 import Hero from '@/components/product-page/InfoSection';
+import DownloadsBlock from '@/components/product-page/DownloadsBlock';
 
 // It's crucial to correctly type the `params` prop as a Promise
 // and ensure the component is an 'async' function, as it is a server component.
@@ -45,7 +46,7 @@ export default async function ProductPage({
       {/* FAQ Section */}
       <FaqSection faqs={faqs} />
       {product.claim && <Hero {...product.claim} lang={lang} />}
-      
+      {product.download && <DownloadsBlock data={product.download} lang={lang} />}
     </main>
   );
 }
