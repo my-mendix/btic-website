@@ -1,7 +1,5 @@
 import { ProductComponent } from "@/types/strapiResponseDataTypes";
 import React from "react";
-
-import HeroSection from "./HeroSection";
 import CoverageList from "./CoverageList";
 import ClaimsSection from "./ClaimsSection";
 import DownloadsBlock from "./DownloadsBlock";
@@ -16,7 +14,6 @@ interface Props {
 // This approach is more scalable and type-safe than a switch statement.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const componentMap: { [key: string]: React.FC<any> } = {
-  "product.hero-section": HeroSection,
   "product.coverage-list": CoverageList,
   "product.claims-section": ClaimsSection,
   "product.downloads-block": DownloadsBlock,

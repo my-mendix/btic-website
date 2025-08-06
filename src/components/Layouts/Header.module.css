@@ -4,7 +4,7 @@
 .header {
   width: 100%;
   background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(211, 43, 43, 0.05);
   position: relative; /* <-- ESSENTIAL for z-index to work */
   z-index: 1000;      /* <-- FIX for mega menu hiding */
   display: block;     /* <-- Default desktop state */

@@ -8,6 +8,8 @@ export interface Button {
   id: number;
   label: string;
   url: string;
+  label_ar: string;
+  url_ar: string;
 }
 
 export interface RichTextNode {
@@ -136,6 +138,7 @@ export interface Product {
   content: ProductComponent[];
   faqs: { data: Faq[] };
   hero: HeroComponent;
+  claim: HeroComponent;
   seo: Seo;
   createdAt: string;
   updatedAt: string;
@@ -145,10 +148,11 @@ export interface Product {
 export interface HeroComponent {
   id: number;
   title: string;
-  titleAr: string;
+  title_ar: string;
   description: string;
-  descriptionAr: string;
+  description_ar: string;
   image: StrapiMedia;
+  buttons: Button[];
 }
 
 export interface StaticProduct {

@@ -95,6 +95,19 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
           populate: {
             image: {
               fields: ["url", "alternativeText"]
+            },
+            buttons: {
+              fields: ["label", "url", "label_ar", "url_ar"]
+            }
+          }
+        },
+        claim: {
+          populate: {
+            image: {
+              fields: ["url", "alternativeText"]
+            },
+            buttons: {
+              fields: ["label", "url", "label_ar", "url_ar"]
             }
           }
         },
