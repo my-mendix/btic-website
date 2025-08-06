@@ -26,14 +26,10 @@ const DownloadsBlock: React.FC<DownloadsBlockProps> = ({ data, lang }) => {
               return null;
             }
 
-            const fileUrl = file.url.startsWith('http')
-              ? file.url
-              : `${getStrapiURL()}${file.url}`;
-
             return (
               <a
                 key={fileItem.id}
-                href={fileUrl}
+                href={`${getStrapiURL()}${file.url}`}
                 download={file.name}
                 className={styles.downloadLink}
                 target="_blank"

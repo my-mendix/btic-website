@@ -95,6 +95,7 @@ export interface ClaimsSectionComponent {
 }
 
 export interface DownloadsBlockComponent {
+  __component: 'product.downloads-block';
   id: number;
   title: string;
   title_ar: string;
