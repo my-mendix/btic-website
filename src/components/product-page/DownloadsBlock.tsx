@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './DownloadsBlock.module.css';
 import { FaDownload } from 'react-icons/fa';
 import { DownloadsBlockComponent } from '@/types/strapiResponseDataTypes';
+import { getStrapiURL } from '@/lib/config';
 
 interface DownloadsBlockProps {
   data: DownloadsBlockComponent;
@@ -21,15 +22,19 @@ const DownloadsBlock: React.FC<DownloadsBlockProps> = ({ data, lang }) => {
             const fileLabel = isArabic ? fileItem.label_ar : fileItem.label;
             const file = isArabic ? fileItem.file_ar : fileItem.file;
 
-            if (!file || !file.data) {
+            if (!file) {
               return null;
             }
+
+            const fileUrl = file.url.startsWith('http')
+              ? file.url
+              : `${getStrapiURL()}${file.url}`;
 
             return (
               <a
                 key={fileItem.id}
-                href={file.data.url}
-                download={file.data.name}
+                href={fileUrl}
+                download={file.name}
                 className={styles.downloadLink}
                 target="_blank"
                 rel="noopener noreferrer"

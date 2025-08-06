@@ -102,8 +102,8 @@ export interface DownloadsBlockComponent {
     id: number;
     label: string;
     label_ar: string;
-    file: StrapiMediaResponse;
-    file_ar: StrapiMediaResponse;
+    file: StrapiMedia;
+    file_ar: StrapiMedia;
   }[];
 }
 

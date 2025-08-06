@@ -9,6 +9,12 @@
   margin-bottom: 1rem;
 }
 
+.linksContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
 .downloadLink {
   display: flex;
   align-items: center;
