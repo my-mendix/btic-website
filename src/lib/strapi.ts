@@ -78,8 +78,6 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
       populate: {
         content: {
           on: {
-            "product.hero-section": { populate: ["image", "buttons"] },
-            "product.claims-section": { populate: "*" },
             "product.coverage-list": { populate: "*" },
             "product.downloads-block": { populate: "*" },
             "product.addons-section": {
@@ -121,7 +119,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   );
 
   const fullUrl = `${getStrapiURL()}/api/products?${query}`;
-  console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
+  // console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
   
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
