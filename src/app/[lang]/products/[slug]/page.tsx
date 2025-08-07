@@ -28,7 +28,7 @@ async function ProductsPage({
   // console.log('Fetched products:', products);
   // 2. Pass the correctly typed data as props to the interactive Client Component
   return (
-      <ProductListPage products={filteredProducts} slug={slug} />
+      <ProductListPage products={filteredProducts} slug={slug} lang={lang} />
     );
 }
 

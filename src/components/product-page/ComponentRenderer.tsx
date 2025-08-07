@@ -13,13 +13,12 @@ interface Props {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const componentMap: { [key: string]: React.FC<any> } = {
   "product.coverage-list": CoverageList,
-  "product.addons-section": AddonsSection,
+  "product.addon": AddonsSection,
 };
 
 const ComponentRenderer: React.FC<Props> = ({ component, lang }) => {
   // Look up the component in the map.
   const Component = componentMap[component.__component];
-  // console.log('Component:', Component.toString());
 
   if (!Component) {
     console.warn(`Component not implemented: ${component.__component}`);

@@ -9,6 +9,7 @@ import { MegaMenuColumn } from '@/data/menuData'; // Import the type
 interface MegaMenuProps {
   isOpen: boolean;
   data: MegaMenuColumn[];
+  lang: string;
 }
 
 
@@ -25,7 +26,7 @@ type MegaMenuColumnWithId = {
   links: MegaMenuLinkWithId[];
 };
 
-const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data }) => {
+const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data, lang }) => {
   return (
     <div className={`${styles.megaMenu} ${isOpen ? styles.visible : ''}`}>
       <div className={styles.megaMenuContent}>
@@ -35,7 +36,7 @@ const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data }) => {
             <ul>
               {column.links.map((link: MegaMenuLinkWithId) => (
                 <li key={link.id ?? link.href + link.name}>
-                  <Link href={link.href} className={styles.menuBoxLink}>               
+                  <Link href={`/${lang}${link.href}`} className={styles.menuBoxLink}>               
                     <div className={styles.menuBox}>                
                           {link.name}
                     </div>

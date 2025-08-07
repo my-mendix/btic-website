@@ -3,38 +3,45 @@ import React from 'react';
 import Image from 'next/image';
 import styles from './AddonsSection.module.css';
 import { AddonsSectionComponent } from '@/types/strapiResponseDataTypes';
-import { getStrapiMedia } from '@/lib/media'; 
+import { getStrapiMedia } from '@/lib/media';
 
 interface AddonsSectionProps {
   data: AddonsSectionComponent;
+  lang: string;
 }
 
-const AddonsSection: React.FC<AddonsSectionProps> = ({ data }) => {
+const AddonsSection: React.FC<AddonsSectionProps> = ({ data, lang }) => {
+  const isArabic = lang === 'ar';
+  const title = isArabic ? data.title_ar : data.title;
+
   // If there are no features, don't render the component
-  if (!data.features || data.features.length === 0) {
+  if (!data.addonFeature || data.addonFeature.length === 0) {
     return null;
   }
 
   return (
     <section className={styles.addonsSection}>
-      <h2 className={styles.addonsTitle}>{data.title}</h2>
+      <h2 className={styles.addonsTitle}>{title}</h2>
       <div className={styles.addonsGrid}>
-        {data.features.map((feature) => {
-          const iconUrl = getStrapiMedia(feature.icon.data);
+        {data.addonFeature.map((feature) => {
+          const featureTitle = isArabic ? feature.title_ar : feature.title;
+          const featureDescription = isArabic ? feature.description_ar : feature.description;
+          const iconUrl = getStrapiMedia(feature.image);
           return (
             <div key={feature.id} className={styles.addonCard}>
               {iconUrl && (
                 <div className={styles.iconWrapper}>
                   <Image
                     src={iconUrl}
-                    alt={feature.title}
+                    alt={featureTitle}
                     width={60} // Set a display size for the icon
                     height={60}
                     className={styles.addonIcon}
                   />
                 </div>
               )}
-              <p className={styles.addonText}>{feature.title}</p>
+              <h3 className={styles.addonTitle}>{featureTitle}</h3>
+              <p className={styles.addonText}>{featureDescription}</p>
             </div>
           );
         })}

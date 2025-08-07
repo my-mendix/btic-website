@@ -17,8 +17,8 @@ export default async function ProductPage({
   // Await 'params' to resolve the Promise and get the actual object
   const { slug } = await params; 
   const { lang } = await params; 
-  console.log('Language:', lang);
   const product = await fetchProductBySlug(slug);
+  console.log('Fetched Product Data:', JSON.stringify(product, null, 2));
   const allProductTiles = await fetchAllProductTiles();
 
   const faqs = (product.faqs as unknown as { id: number; faq_question: string; faq_answers: string }[]).map((faq) => ({
@@ -52,7 +52,7 @@ export default async function ProductPage({
       {/* Downloads Section */}
       {product.download && <DownloadsBlock data={product.download} lang={lang} />}
       {/* Recommended Section */}
-      <RecommendedProducts products={allProductTiles} currentSlug={slug} />
+      <RecommendedProducts products={allProductTiles} currentSlug={slug} lang={lang} />
     </main>
   );
 }

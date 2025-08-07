@@ -32,7 +32,7 @@ const CoverageList: React.FC<Props> = ({ data, lang }) => {
           <li className={styles.coverageListItem} key={item.id}>
             <span className={styles.coverageBullet}></span>
             <span>
-              {item.text.trim().replace(/^[0-9]+\.\s*/, "")}
+              {item.text ? item.text.trim().replace(/^[0-9]+\.\s*/, "") : ''}
             </span>
           </li>
         ))}

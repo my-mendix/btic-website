@@ -1,6 +1,6 @@
 /* src/components/product-page/RecommendedProducts.module.css */
 .recommendedSection {
-  background-color: #f9f9f9;
+  background-color: #ffffff;
   padding: 3rem 2rem;
 }
 
@@ -9,7 +9,7 @@
   font-weight: 700;
   margin-bottom: 2rem;
   color: #333;
-  text-align: left;
+  text-align: start;
 }
 
 .recommendedGrid {

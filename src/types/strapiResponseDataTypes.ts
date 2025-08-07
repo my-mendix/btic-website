@@ -108,18 +108,28 @@ export interface DownloadsBlockComponent {
   }[];
 }
 
-export interface AddonFeature {
+export interface AddonFeatureOld {
   id: number;
   title: string;
   description: RichTextNode[];
   icon: StrapiMediaResponse;
 }
 
-export interface AddonsSectionComponent {
-  __component: 'product.addons-section';
+export interface AddonFeature {
   id: number;
   title: string;
-  features: AddonFeature[];
+  title_ar: string;
+  description: string;
+  description_ar: string;
+  image: StrapiMedia;
+}
+
+export interface AddonsSectionComponent {
+  __component: 'product.addon';
+  id: number;
+  title: string;
+  title_ar: string;
+  addonFeature: AddonFeature[];
 }
 
 // Union type for all possible components in the dynamic zone.
@@ -209,6 +219,8 @@ export interface ProductButton {
   id: number;
   label: string;
   url: string;
+  label_ar: string;
+  url_ar: string;
 }
 
 // The image object
@@ -223,7 +235,9 @@ export interface ProductTile {
   id: number;
   slug: string;
   title: string;
-  shortDescription: string; // This is a simple string now
+  title_ar: string;
+  shortDescription: string; 
+  shortDescription_ar: string; 
   minimumPrice: string;
   group: string;
   category: string;

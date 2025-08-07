@@ -68,61 +68,7 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   console.log('-----------------------------------------------------');
   console.log('executing fetchProductBySlug function');
   console.log('-----------------------------------------------------');
-  const query = qs.stringify(
-    {
-      filters: {
-        slug: {
-          $eq: slug,
-        },
-      },
-      populate: {
-        content: {
-          on: {
-            "product.coverage-list": { populate: "*" },
-            "product.addons-section": {
-              populate: {
-                features: {
-                  populate: ["icon"],
-                },
-              },
-            },
-          },
-        },
-        hero: {
-          populate: {
-            image: {
-              fields: ["url", "alternativeText"]
-            },
-            buttons: {
-              fields: ["label", "url", "label_ar", "url_ar"]
-            }
-          }
-        },
-        claim: {
-          populate: {
-            image: {
-              fields: ["url", "alternativeText"]
-            },
-            buttons: {
-              fields: ["label", "url", "label_ar", "url_ar"]
-            }
-          }
-        },
-        seo: { populate: "*" },
-        faqs: { populate: "*" },
-        download: {
-          populate: {
-            file: {
-              populate: ['file', 'file_ar']
-            }
-          }
-        }
-      },
-    },
-    {
-      encodeValuesOnly: true, // Ensures clean encoding
-    }
-  );
+  const query = `filters[slug][$eq]=${slug}&populate[hero][populate]=*&populate[claim][populate]=*&populate[content][on][product.coverage-list][populate]=*&populate[content][on][product.addon][populate][addonFeature][populate]=image&populate[seo][populate]=*&populate[faqs][populate]=*&populate[download][populate][file][populate]=*`;
 
   const fullUrl = `${getStrapiURL()}/api/products?${query}`;
   // console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
@@ -227,7 +173,7 @@ export async function fetchAllProductTiles(): Promise<ProductTile[]> {
   console.log('-----------------------------------------------------');
   // This query exactly matches the one you provided
   // const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=group&fields[4]=category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
-  const query = "/api/products?fields[0]=title&fields[1]=shortDescription&fields[2]=minimumPrice&fields[3]=group&fields[4]=category&fields[5]=slug&populate[cardImage][fields][0]=url&populate[cardImage][fields][1]=name&populate[cardButtons][fields][0]=label&populate[cardButtons][fields][1]=url";
+  const query = "/api/products?fields[0]=title&fields[1]=shortDescription&fields[2]=minimumPrice&fields[3]=group&fields[4]=category&fields[5]=slug&fields[6]=title_ar&fields[7]=shortDescription_ar&populate[cardImage][fields][0]=url&populate[cardImage][fields][1]=name&populate[cardButtons][fields][0]=label&populate[cardButtons][fields][1]=url&populate[cardButtons][fields][2]=label_ar&populate[cardButtons][fields][3]=url_ar";
   
   const fullUrl = `${getStrapiURL()}${query}`;
   console.log(`Fetching all product tiles from URL: ${fullUrl}`);
