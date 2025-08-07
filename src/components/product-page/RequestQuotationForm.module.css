@@ -1,0 +1,144 @@
+.container {
+  background: #fff;
+  max-width: 900px;
+  margin: 2rem auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px #0001;
+  padding: 2rem 2.5rem 2.5rem 2.5rem;
+}
+.title {
+  margin-bottom: 2rem;
+  color: #444;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.row {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.col {
+  flex: 1;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.label {
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+.input,
+.textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-top: .2rem;
+  margin-bottom: .5rem;
+  transition: border 0.2s;
+  background: #fcfcfc;
+}
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #e53935;
+}
+.textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+.req {
+  color: #e53935;
+  margin-left: 0.2em;
+}
+.captchaRow {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 1rem;
+}
+.captchaBox {
+  background: #fafbfc;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 1rem 1.4rem 1rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+.captchaCheckbox {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.7em;
+  accent-color: #e53935;
+}
+.captchaImg {
+  margin-left: 1em;
+  width: 37px;
+  height: 37px;
+  background: url("https://www.gstatic.com/recaptcha/api2/logo_48.png") center/contain no-repeat;
+  display: inline-block;
+}
+.btnRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+.submitBtn {
+  background: #e53935;
+  color: #fff;
+  padding: 0.8rem 2.4rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 6px #e5393533;
+  transition: background 0.2s;
+}
+.submitBtn:hover:enabled {
+  background: #b71c1c;
+}
+.submitBtn:disabled {
+  background: #d0d0d0;
+  color: #888;
+  cursor: not-allowed;
+}
+
+/* Responsive Design */
+@media (max-width: 700px) {
+  .container {
+    padding: 1rem 0.5rem 2rem 0.5rem;
+  }
+  .form {
+    gap: 1rem;
+  }
+  .row {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .btnRow {
+    justify-content: center;
+  }
+}
+@media (max-width: 420px) {
+  .container {
+    padding: 0.5rem 0 1rem 0;
+  }
+  .title {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  .submitBtn {
+    width: 100%;
+    padding: 0.8rem 0;
+  }
+}

@@ -1,11 +1,13 @@
 // src/app/products/[slug]/page.tsx
 import { fetchProductBySlug, fetchAllProductTiles } from '@/lib/strapi';
+import styles from '@/app/ProductPage.module.css';
+
 import ComponentRenderer from '@/components/product-page/ComponentRenderer';
 import RecommendedProducts from '@/components/product-page/RecommendedProducts';
-import styles from '@/app/ProductPage.module.css';
 import FaqSection from '@/components/product-page/FaqSection';
 import Hero from '@/components/product-page/InfoSection';
 import DownloadsBlock from '@/components/product-page/DownloadsBlock';
+import RequestQuotationForm from '@/components/product-page/RequestQuotationForm';
 
 // It's crucial to correctly type the `params` prop as a Promise
 // and ensure the component is an 'async' function, as it is a server component.
@@ -51,6 +53,8 @@ export default async function ProductPage({
       <FaqSection faqs={faqs} />
       {/* Downloads Section */}
       {product.download && <DownloadsBlock data={product.download} lang={lang} />}
+      {/* Request Quotation Form Section */}
+      <RequestQuotationForm lang={lang} />
       {/* Recommended Section */}
       <RecommendedProducts products={allProductTiles} currentSlug={slug} lang={lang} />
     </main>
