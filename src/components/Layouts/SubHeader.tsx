@@ -13,9 +13,10 @@ import { MegaMenuColumn } from '@/data/menuData';
 
 interface SubHeaderProps {
   megaMenuData: MegaMenuColumn[];
+  lang: string;
 }
 
-const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData }) => {
+const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData,lang }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);  
 
   return (
@@ -34,7 +35,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData }) => {
             onMouseLeave={() => setIsMenuOpen(false)}
           >
             <Link href="/products" className={styles.navButton}>Products</Link>
-            <MegaMenu isOpen={isMenuOpen} data={megaMenuData} />
+            <MegaMenu isOpen={isMenuOpen} data={megaMenuData} lang={lang} />
           </div>
           {/* <Link href="/medical-network" className={styles.navButton}>Medical Network</Link> */}
         </div>
