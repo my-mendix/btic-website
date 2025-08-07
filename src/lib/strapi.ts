@@ -227,7 +227,7 @@ export async function fetchAllProductTiles(): Promise<ProductTile[]> {
   console.log('-----------------------------------------------------');
   // This query exactly matches the one you provided
   // const query = "/api/product-tiles?fields[0]=Title&fields[1]=shortDescription&fields[2]=Price&fields[3]=group&fields[4]=category&populate[image][fields][0]=url&populate[image][fields][1]=name&populate[Buttons][fields][0]=label&populate[Buttons][fields][1]=url";
-  const query = "/api/products?fields[0]=title&fields[1]=shortDescription&fields[2]=minimumPrice&fields[3]=group&fields[4]=category&populate[cardImage][fields][0]=url&populate[cardImage][fields][1]=name&populate[cardButtons][fields][0]=label&populate[cardButtons][fields][1]=url";
+  const query = "/api/products?fields[0]=title&fields[1]=shortDescription&fields[2]=minimumPrice&fields[3]=group&fields[4]=category&fields[5]=slug&populate[cardImage][fields][0]=url&populate[cardImage][fields][1]=name&populate[cardButtons][fields][0]=label&populate[cardButtons][fields][1]=url";
   
   const fullUrl = `${getStrapiURL()}${query}`;
   console.log(`Fetching all product tiles from URL: ${fullUrl}`);

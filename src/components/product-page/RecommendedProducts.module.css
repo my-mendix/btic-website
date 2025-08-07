@@ -1,0 +1,19 @@
+/* src/components/product-page/RecommendedProducts.module.css */
+.recommendedSection {
+  background-color: #f9f9f9;
+  padding: 3rem 2rem;
+}
+
+.recommendedTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  color: #333;
+  text-align: left;
+}
+
+.recommendedGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}

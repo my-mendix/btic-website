@@ -221,6 +221,7 @@ export interface ProductImage {
 // The main object for a single product tile
 export interface ProductTile {
   id: number;
+  slug: string;
   title: string;
   shortDescription: string; // This is a simple string now
   minimumPrice: string;

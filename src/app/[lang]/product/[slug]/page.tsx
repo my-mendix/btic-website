@@ -1,6 +1,7 @@
 // src/app/products/[slug]/page.tsx
-import { fetchProductBySlug } from '@/lib/strapi';
+import { fetchProductBySlug, fetchAllProductTiles } from '@/lib/strapi';
 import ComponentRenderer from '@/components/product-page/ComponentRenderer';
+import RecommendedProducts from '@/components/product-page/RecommendedProducts';
 import styles from '@/app/ProductPage.module.css';
 import FaqSection from '@/components/product-page/FaqSection';
 import Hero from '@/components/product-page/InfoSection';
@@ -18,6 +19,7 @@ export default async function ProductPage({
   const { lang } = await params; 
   console.log('Language:', lang);
   const product = await fetchProductBySlug(slug);
+  const allProductTiles = await fetchAllProductTiles();
 
   const faqs = (product.faqs as unknown as { id: number; faq_question: string; faq_answers: string }[]).map((faq) => ({
     id: faq.id,
@@ -30,10 +32,10 @@ export default async function ProductPage({
 
   return (
     <main className={styles.pageContainer}>
-
+      {/* Hero Section */}
       {product.hero && <Hero {...product.hero} lang={lang} />}
 
-      {/* Content Blocks */}
+      {/* Content Blocks from Dynamic zone*/}
       {Array.isArray(product?.content) &&
         product.content.map(component => (
           <ComponentRenderer
@@ -43,10 +45,14 @@ export default async function ProductPage({
           />
         ))}
 
+      {/* Claims Section */}
+      {product.claim && <Hero {...product.claim} lang={lang} />}
       {/* FAQ Section */}
       <FaqSection faqs={faqs} />
-      {product.claim && <Hero {...product.claim} lang={lang} />}
+      {/* Downloads Section */}
       {product.download && <DownloadsBlock data={product.download} lang={lang} />}
+      {/* Recommended Section */}
+      <RecommendedProducts products={allProductTiles} currentSlug={slug} />
     </main>
   );
 }
