@@ -12,16 +12,16 @@
 .faqGrid {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
+  justify-content: left;
+  align-items: left;
   gap: 2.5rem;
 }
 
 .faqList {
   flex: 2;
   min-width: 340px;
-  padding: 2.5rem;
-  padding-right: 0;
+  /* padding: 2.5rem; */
+  /* padding-right: 0; */
   display: flex;
   flex-direction: column;
 }
