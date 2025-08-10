@@ -1,107 +1,119 @@
 /* src/components/drewilna/FaqSection.module.css */
 
+
 .faqSection {
-  padding: 60px 0;
-  background-color: #fff;
+  background: #f5f1f1;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  padding: 2rem 2rem 2rem 2rem ;
+  margin: 2rem 0;
 }
 
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.contentWrapper {
+.faqGrid {
   display: flex;
-  gap: 60px;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 2.5rem;
 }
 
-.accordionContainer {
-  flex: 1.5;
+.faqList {
+  flex: 2;
+  min-width: 340px;
+  padding: 2.5rem;
+  padding-right: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.imageContainer {
-  flex: 1;
-  text-align: right;
-}
-
-.title {
-  font-size: 28px;
+.sectionTitle {
+  font-size: 1.4rem;
   font-weight: 600;
+  margin-bottom: 1.5rem;
   color: #333;
-  margin-bottom: 30px;
 }
 
-.accordion {
-  border-top: 1px solid #e0e0e0;
+.faqItem {
+  border-bottom: 1px solid #e5e5e5;
 }
 
-/* --- Styles for AccordionItem.tsx --- */
-.accordionItem {
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.accordionHeader {
+.faqQuestionRow {
+  background: none;
+  border: none;
+  outline: none;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  background: none;
-  border: none;
-  text-align: left;
   cursor: pointer;
-}
-
-.questionText {
-  font-size: 18px;
+  font-size: 1.06rem;
+  padding: 1rem 0;
+  color: #3a3a3a;
   font-weight: 500;
-  color: #333;
+  transition: color 0.2s;
+}
+.faqQuestionRow:hover {
+  color: #d92331;
 }
 
-.iconWrapper {
-  color: #555;
-  font-size: 16px;
+.faqIcon {
+  font-size: 1.3rem;
+  color: #ba1831;
+  margin-left: 16px;
+  min-width: 28px;
+  display: flex;
+  justify-content: center;
 }
 
-/* This is the key to the animation */
-.accordionContent {
-  display: grid;
-  grid-template-rows: 0fr; /* Collapse content by default */
-  transition: grid-template-rows 0.4s ease-in-out;
-  font-size: 18px;
-}
-
-.accordionContent.isOpen {
-  grid-template-rows: 1fr; /* Expand content to its natural height */
-}
-
-.accordionContentInner {
+.faqAnswerWrap {
+  max-height: 0;
   overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faqAnswerWrap.open {
+  max-height: 350px; /* Adjust if answer is longer */
+  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faqAnswer {
+  color: #535353;
+  padding: 0.5rem 0 1rem 0;
+  font-size: 1rem;
 }
 
-.accordionContentInner p {
-  padding-bottom: 20px;
-  color: #555;
-  line-height: 1.7;
-}
-
-.viewAllButton {
-  display: inline-block;
-  margin-top: 30px;
-  padding: 12px 30px;
-  border: 1px solid #d9534f;
-  color: #d9534f;
-  border-radius: 5px;
-  text-decoration: none;
+.faqViewAllBtn {
+  margin-top: 1.5rem;
+  padding: 0.7rem 1.5rem;
+  border: 1.5px solid #d92331;
+  background: #fff;
+  color: #d92331;
   font-weight: 500;
-  transition: all 0.2s;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: background 0.2s, color 0.2s;
+}
+.faqViewAllBtn:hover {
+  background: #d92331;
+  color: #fff;
 }
 
-.viewAllButton:hover {
-  background: #d9534f;
-  color: #fff;
+.faqImageCol {
+  flex: 1.2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 335px;
+  background: transparent;
+  padding: 1.5rem 1.5rem 1.5rem 0;
+}
+
+.faqImage {
+  width: 100%;
+  max-width: 390px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 0 0 1.5px #d92331;
 }
 
 /* --- Responsive Styles --- */
@@ -116,5 +128,10 @@
   .imageContainer img {
     max-width: 100%;
     height: auto;
+  }
+}
+@media (max-width: 900px) {
+  .faqImageCol {
+    display: none;
   }
 }

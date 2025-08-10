@@ -1,7 +1,15 @@
-.container {
+.container_original {
   padding: 1rem;
   background-color: #fff;
 }
+.container{
+  background: #f5f1f1;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.07);
+  padding: 2rem 2rem 2rem 2rem ;
+  margin: 2rem 0;
+}
+
 
 .heading {
   font-size: 1.5rem;

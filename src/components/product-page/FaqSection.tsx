@@ -1,7 +1,7 @@
 // src/components/product-page/FaqSection.tsx
 'use client';
 import React, { useState } from "react";
-import styles from "@/app/ProductPage.module.css";
+import styles from "./FaqSection.module.css";
 import Image from "next/image";
 import { Faq } from "@/types/strapiResponseDataTypes";
 import RichTextBlock from "./RichTextBlock";
@@ -45,7 +45,7 @@ const FaqSection: React.FC<Props> = ({ faqs, imageSrc }) => {
           ))}
           <button className={styles.faqViewAllBtn}>View all FAQs</button>
         </div>
-        <div className={styles.faqImageCol}>
+        <div className={`${styles.faqImageCol} hidden md:block`}>
           <Image
             src={imageSrc || "/images/faq-illustration.jpg"}
             alt="FAQ illustration"
