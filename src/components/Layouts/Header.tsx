@@ -26,10 +26,11 @@ const labels = {
 
 const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
   const [openMenu, setOpenMenu] = useState<'individual' | 'corporate' | 'about' | null>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const headerRef = React.useRef<HTMLElement>(null);
   const pathname = usePathname();
 
   const getLabel = (key: keyof typeof labels) => labels[key][lang as keyof typeof labels[keyof typeof labels]];
-
   const getLanguageSwitchUrl = () => {
     const currentLang = pathname.split('/')[1];
     const newLang = currentLang === 'en' ? 'ar' : 'en';
@@ -37,6 +38,10 @@ const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
   };
 
   useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+
     const handleClickOutside = () => {
       setOpenMenu(null);
     };
@@ -49,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
 
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} ref={headerRef}>
       <div className={styles.topBar}>
         <nav className={styles.container}>
           <div className={styles.topNav}>
@@ -73,6 +78,7 @@ const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
                 setOpenMenu={setOpenMenu}
                 megaMenuData={mainMenuData}
                 lang={lang}
+                headerHeight={headerHeight}
               />
               <NavItemWithMenu
                 label={getLabel('corporate')}
@@ -82,6 +88,7 @@ const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
                 setOpenMenu={setOpenMenu}
                 megaMenuData={mainMenuData}
                 lang={lang}
+                headerHeight={headerHeight}
               />
               <NavItemWithMenu
                 label={getLabel('about')}
@@ -91,6 +98,7 @@ const Header: React.FC<HeaderProps> = ({ mainMenuData ,lang}  ) => {
                 setOpenMenu={setOpenMenu}
                 megaMenuData={mainMenuData}
                 lang={lang}
+                headerHeight={headerHeight}
               />
               <Link href={`/${lang}/medical-network`} className={styles.topNavLink}>{getLabel('medicalNetwork')}</Link>
 
@@ -121,6 +129,7 @@ interface NavItemWithMenuProps {
   setOpenMenu: React.Dispatch<React.SetStateAction<'individual' | 'corporate' | 'about' | null>>;
   megaMenuData: MegaMenuColumn[];
   lang: string;
+  headerHeight: number;
 }
 
 const NavItemWithMenu: React.FC<NavItemWithMenuProps> = ({
@@ -131,9 +140,11 @@ const NavItemWithMenu: React.FC<NavItemWithMenuProps> = ({
   setOpenMenu,
   megaMenuData,
   lang,
+  headerHeight,
 }) => {
   const hasMenu = megaMenuData.length > 0;
-  const filteredMegaMenuData = megaMenuData.filter((item: MegaMenuColumn) => item.category === label);
+  const englishLabel = labels[menuKey]['en'];
+  const filteredMegaMenuData = megaMenuData.filter((item: MegaMenuColumn) => item.category === englishLabel);
   return (
     <div
       className={styles.navItem}
@@ -147,7 +158,7 @@ const NavItemWithMenu: React.FC<NavItemWithMenuProps> = ({
         {label}
       </Link>
       
-      {hasMenu && <MegaMenu isOpen={openMenu === menuKey} data={filteredMegaMenuData} lang={lang} />}
+      {hasMenu && <MegaMenu isOpen={openMenu === menuKey} data={filteredMegaMenuData} lang={lang} top={headerHeight} />}
     </div>
   );
 };

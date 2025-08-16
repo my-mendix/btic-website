@@ -259,33 +259,35 @@ export interface StrapiProductTileResponse {
 }
 
 // Types for Product Mega Menu Data
-interface MainMenuLink {
+export interface MainMenuLink {
   name: string;
   href: string;
-  nameAr: string;
-  hrefAr: string;
+  name_ar: string;
+  href_ar: string;
 }
 
 export interface MainMenuColumn {
   title: string;
-  titleAr: string;
+  title_ar: string;
   category: string;
+  category_ar: string;
   links: MainMenuLink[];
 }
 
 export interface ProductLink {
   id: number;
   name: string;
-  nameAr: string;
+  name_ar: string;
   href: string;
-  hrefAr: string;
+  href_ar: string;
 }
 
 export interface ProductCategory {
   id: number;
   title: string;
-  titleAr: string;
+  title_ar: string;
   category: string;
+  category_ar: string;
   links: ProductLink[];
 }
 

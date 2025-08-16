@@ -26,7 +26,40 @@ interface RequestQuotationFormProps {
 const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!;
 
 const RequestQuotationForm: React.FC<RequestQuotationFormProps> = ({lang}) => {
-    console.log("RequestQuotationForm rendered with lang:", lang);
+    const isArabic = lang === 'ar';
+
+    const translations = {
+        ar: {
+            title: "طلب عرض أسعار",
+            name: "الاسم",
+            company: "الشركة",
+            email: "البريد الإلكتروني",
+            contactNumber: "رقم الاتصال",
+            message: "الرسالة",
+            submit: "إرسال",
+            submitting: "جاري الإرسال...",
+            recaptchaError: "يرجى إكمال reCAPTCHA.",
+            recaptchaValidationError: "فشل التحقق من reCAPTCHA. يرجى المحاولة مرة أخرى.",
+            submissionError: "حدث خطأ ما. يرجى المحاولة مرة أخرى في وقت لاحق.",
+            submissionSuccess: "تم إرسال طلبك بنجاح!",
+        },
+        en: {
+            title: "Request For Quotation",
+            name: "Name",
+            company: "Company",
+            email: "Email",
+            contactNumber: "Contact Number",
+            message: "Message",
+            submit: "Submit",
+            submitting: "Submitting...",
+            recaptchaError: "Please complete the reCAPTCHA.",
+            recaptchaValidationError: "reCAPTCHA validation failed. Please try again.",
+            submissionError: "Something went wrong. Please try again later.",
+            submissionSuccess: "Your request has been submitted!",
+        },
+    };
+
+    const t = translations[lang === 'ar' ? 'ar' : 'en'];
   const [form, setForm] = useState<FormData>(initial);
   const [loading, setLoading] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
@@ -42,7 +75,7 @@ const RequestQuotationForm: React.FC<RequestQuotationFormProps> = ({lang}) => {
     setErrors(null);
 
     if (!recaptchaToken) {
-      setErrors("Please complete the reCAPTCHA.");
+      setErrors(t.recaptchaError);
       return;
     }
 
@@ -56,7 +89,7 @@ const RequestQuotationForm: React.FC<RequestQuotationFormProps> = ({lang}) => {
       });
       const verifyData = await verifyRes.json();
       if (!verifyData.success) {
-        setErrors("reCAPTCHA validation failed. Please try again.");
+        setErrors(t.recaptchaValidationError);
         recaptchaRef.current?.reset();
         setRecaptchaToken(null);
         setLoading(false);
@@ -69,45 +102,45 @@ const RequestQuotationForm: React.FC<RequestQuotationFormProps> = ({lang}) => {
       setForm(initial);
       setRecaptchaToken(null);
       recaptchaRef.current?.reset();
-      alert("Your request has been submitted!");
+      alert(t.submissionSuccess);
     } catch (error) {
         console.error("Error submitting form:", error);
-      setErrors("Something went wrong. Please try again later.");
+      setErrors(t.submissionError);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} dir={isArabic ? 'rtl' : 'ltr'}>
       <form className={styles.form} onSubmit={onSubmit} autoComplete="off">
-        <h2 className={styles.title}>Request For Quotation</h2>
+        <h2 className={styles.title}>{t.title}</h2>
         <div className={styles.row}>
           <div className={styles.col}>
-            <label>Name<span className={styles.req}>*</span>
+            <label>{t.name}<span className={styles.req}>*</span>
               <input type="text" name="name" required value={form.name} onChange={onInput} className={styles.input} />
             </label>
           </div>
           <div className={styles.col}>
-            <label>Company<span className={styles.req}>*</span>
+            <label>{t.company}<span className={styles.req}>*</span>
               <input type="text" name="company" required value={form.company} onChange={onInput} className={styles.input} />
             </label>
           </div>
         </div>
         <div className={styles.row}>
           <div className={styles.col}>
-            <label>Email<span className={styles.req}>*</span>
+            <label>{t.email}<span className={styles.req}>*</span>
               <input type="email" name="email" required value={form.email} onChange={onInput} className={styles.input} />
             </label>
           </div>
           <div className={styles.col}>
-            <label>Contact Number<span className={styles.req}>*</span>
+            <label>{t.contactNumber}<span className={styles.req}>*</span>
               <input type="tel" name="contactNumber" required value={form.contactNumber} onChange={onInput} className={styles.input} />
             </label>
           </div>
         </div>
         <label>
-          Message<span className={styles.req}>*</span>
+          {t.message}<span className={styles.req}>*</span>
           <textarea name="message" rows={4} required value={form.message} onChange={onInput} className={styles.textarea} />
         </label>
         <div className={styles.captchaRow}>
@@ -121,7 +154,7 @@ const RequestQuotationForm: React.FC<RequestQuotationFormProps> = ({lang}) => {
         {errors && <div style={{ color: "#e53935", margin: "10px 0" }}>{errors}</div>}
         <div className={styles.btnRow}>
           <button type="submit" className={styles.submitBtn} disabled={loading}>
-            {loading ? "Submitting..." : "Submit"}
+            {loading ? t.submitting : t.submit}
           </button>
         </div>
       </form>

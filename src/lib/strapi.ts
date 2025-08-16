@@ -8,18 +8,18 @@ import { StrapiResponse,
          ProductLink,
          MainMenuColumn } from '@/types/strapiResponseDataTypes';
 import { notFound } from 'next/navigation';
-import qs from 'qs';
 import { getStrapiURL } from './config';
 
 
 
-export async function fetchMainMenuData(): Promise<MainMenuColumn[]> {
+export async function fetchMainMenuData(lang?: string): Promise<MainMenuColumn[]> {
   console.log('-----------------------------------------------------');
   console.log('executing fetchMainMenuData function');
   console.log('-----------------------------------------------------');
-  const query = "/api/categories?fields[0]=title&fields[1]=category&populate[0]=links";
+  const query = "/api/categories?fields[0]=title&fields[1]=category&fields[2]=title_ar&fields[3]=category_ar&populate[links][fields][0]=name&populate[links][fields][1]=href&populate[links][fields][2]=name_ar&populate[links][fields][3]=href_ar";
   const fullUrl = `${getStrapiURL()}${query}`;
   // console.log(`Fetching mega menu data from URL: ${fullUrl}`);
+  console.log('lang for fetching main menu:', lang);
 
   try {
     const res = await fetch(fullUrl, { next: { revalidate: 60 } });
@@ -38,15 +38,16 @@ export async function fetchMainMenuData(): Promise<MainMenuColumn[]> {
     
 return json.data.map((item: ProductCategory) => ({
       title: item.title || '',
-      titleAr: item.titleAr || '',
+      title_ar: item.title_ar || '',
       category: item.category || '',
+      category_ar: item.category_ar || '',
       links: (item.links || []).map((link: ProductLink) => ({
         name: link.name || '',
-        nameAr: link.nameAr || '',
+        name_ar: link.name_ar || '',
         href: link.href || '#',
-        hrefAr: link.hrefAr || '#',
+        href_ar: link.href_ar || '#',
       })),
-    }));
+    })) as MainMenuColumn[];
 
   } catch (error) {
     console.error("Strapi fetch error (mega menu):", error);
@@ -68,9 +69,9 @@ export async function fetchProductBySlug(slug: string): Promise<Product> {
   console.log('-----------------------------------------------------');
   console.log('executing fetchProductBySlug function');
   console.log('-----------------------------------------------------');
-  const query = `filters[slug][$eq]=${slug}&populate[hero][populate]=*&populate[claim][populate]=*&populate[content][on][product.coverage-list][populate]=*&populate[content][on][product.addon][populate][addonFeature][populate]=image&populate[seo][populate]=*&populate[faqs][populate]=*&populate[download][populate][file][populate]=*`;
+  const query = `/api/products?slug=${slug}`;
 
-  const fullUrl = `${getStrapiURL()}/api/products?${query}`;
+  const fullUrl = `${getStrapiURL()}${query}`;
   // console.log(`Fetching product with slug "${slug}" from URL: ${fullUrl}`);
   
   try {
@@ -113,26 +114,28 @@ export async function fetchAllProducts(): Promise<Product[]> {
   console.log('-----------------------------------------------------');
   console.log('Executeing fetchAllProducts function');
   console.log('-----------------------------------------------------');
-  const query = qs.stringify(
-    {
-      fields: ['title', 'slug', 'category', 'price', 'shortDescription'],
-      populate: {
-        content: {
-          on: {
-            "product.hero-section": { populate: ["image"] },
-          },
-        },
-        category: {
-          fields: ['name']
-        }
-      },
-    },
-    {
-      encodeValuesOnly: true,
-    }
-  );
+  // const query = qs.stringify(
+  //   {
+  //     fields: ['title', 'slug', 'category', 'price', 'shortDescription'],
+  //     populate: {
+  //       content: {
+  //         on: {
+  //           "product.hero-section": { populate: ["image"] },
+  //         },
+  //       },
+  //       category: {
+  //         fields: ['name']
+  //       }
+  //     },
+  //   },
+  //   {
+  //     encodeValuesOnly: true,
+  //   }
+  // );
 
-  const fullUrl = `${getStrapiURL()}api/products?${query}`;
+  const query = '/api/products';
+
+  const fullUrl = `${getStrapiURL()}${query}`;
   console.log(`Fetching all products from URL: ${fullUrl}`);
   console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
   

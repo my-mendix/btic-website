@@ -1,7 +1,7 @@
 // src/components/SubHeader.tsx
 
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from './SubHeader.module.css';
@@ -17,11 +17,19 @@ interface SubHeaderProps {
 }
 
 const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData,lang }) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);  
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [subHeaderHeight, setSubHeaderHeight] = useState(0);
+  const subHeaderRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (subHeaderRef.current) {
+      setSubHeaderHeight(subHeaderRef.current.offsetHeight);
+    }
+  }, []);
 
   return (
     // This component will be hidden on mobile via the CSS
-    <nav className={styles.subHeader}>
+    <nav className={styles.subHeader} ref={subHeaderRef}>
       <div className={styles.container}>
         <Link href="/">
           <Image src="/icons/btic_icon.svg" alt="Boubyan Takaful Logo" width={80} height={40} />
@@ -35,7 +43,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ megaMenuData,lang }) => {
             onMouseLeave={() => setIsMenuOpen(false)}
           >
             <Link href="/products" className={styles.navButton}>Products</Link>
-            <MegaMenu isOpen={isMenuOpen} data={megaMenuData} lang={lang} />
+            <MegaMenu isOpen={isMenuOpen} data={megaMenuData} lang={lang} top={subHeaderHeight} />
           </div>
           {/* <Link href="/medical-network" className={styles.navButton}>Medical Network</Link> */}
         </div>

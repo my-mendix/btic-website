@@ -35,7 +35,7 @@ interface RootLayoutProps {
 export default async function RootLayout({ children, params }: RootLayoutProps) {
   const { lang } = await params;
   console.log('Language:', lang);
-  const mainMenuData = await fetchMainMenuData(); // optionally pass lang to fetch localized menu
+  const mainMenuData = await fetchMainMenuData(lang); // optionally pass lang to fetch localized menu
   // console.log('Main Menu Data:', mainMenuData);
 
   return (

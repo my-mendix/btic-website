@@ -2,13 +2,15 @@
 
 export interface MegaMenuLink {
   name: string;
-  nameAr: string;
+  name_ar: string;
   href: string;
-  hrefAr: string;
+  href_ar: string;
 }
 
 export interface MegaMenuColumn {
   title: string;
+  title_ar: string;
   category: string;
+  category_ar: string;
   links: MegaMenuLink[];
 }

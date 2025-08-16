@@ -123,26 +123,25 @@
 }
 
 .megaMenu {
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 56px; /* Adjust this value to match your header's height */
   left: 0;
-  width: 900px;
+  width: 100%;
   background-color: #fff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 0 0 8px 8px;
   padding: 30px 40px;
-  border-top: 3px solid #d9534f;
-  /* Animation */
+  border-top: 1px solid #f0f0f0;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(-10px); /* Remove translateX(-50%) */
+  transform: translateY(-10px);
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  z-index: 999; /* Ensure it's below the header but above other content */
 }
 
 .megaMenu.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0); /* Remove translateX(-50%) */
+  transform: translateY(0);
 }
 
 .megaMenuContent {

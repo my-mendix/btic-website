@@ -10,35 +10,28 @@ interface MegaMenuProps {
   isOpen: boolean;
   data: MegaMenuColumn[];
   lang: string;
+  top: number;
 }
 
 
-// Extend types to include id for type safety
-type MegaMenuLinkWithId = {
-  id?: string | number;
-  name: string;
-  href: string;
-};
-type MegaMenuColumnWithId = {
-  id?: string | number;
-  title: string;
-  category: string;
-  links: MegaMenuLinkWithId[];
-};
+const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data, lang, top }) => {
+  const isArabic = lang === 'ar';
+  const menuStyle = {
+    top: `${top}px`,
+  };
 
-const MegaMenu: React.FC<MegaMenuProps> = ({ isOpen, data, lang }) => {
   return (
-    <div className={`${styles.megaMenu} ${isOpen ? styles.visible : ''}`}>
+    <div className={`${styles.megaMenu} ${isOpen ? styles.visible : ''}`} style={menuStyle} dir={isArabic ? 'rtl' : 'ltr'}>
       <div className={styles.megaMenuContent}>
-        {data.map((column: MegaMenuColumnWithId) => (
-          <div key={column.id ?? column.title + column.category} className={styles.megaMenuColumn}>
-            <h4>{column.title}</h4>
+        {data.map((column) => (
+          <div key={column.title + column.category} className={styles.megaMenuColumn}>
+            <h4>{isArabic ? column.title_ar : column.title}</h4>
             <ul>
-              {column.links.map((link: MegaMenuLinkWithId) => (
-                <li key={link.id ?? link.href + link.name}>
+              {column.links.map((link) => (
+                <li key={link.href + link.name}>
                   <Link href={`/${lang}${link.href}`} className={styles.menuBoxLink}>               
                     <div className={styles.menuBox}>                
-                          {link.name}
+                          {isArabic ? link.name_ar : link.name}
                     </div>
                   </Link>
                 </li>
